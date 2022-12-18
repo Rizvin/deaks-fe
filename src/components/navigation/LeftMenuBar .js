@@ -7,6 +7,7 @@ import { RiHotelFill } from "react-icons/ri";
 import { RiShoppingBasketFill } from "react-icons/ri";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import WalletIcon from '@mui/icons-material/Wallet';
 
 import "./style/LeftMenuBar.css";
 const logo = require("../../assets/logo.jpg");
@@ -16,7 +17,7 @@ export const LeftMenuBar = (props) => {
     <div className="applicationWrapper">
       <div className="menubarParent">
         <div className="menubarWrapper">
-         
+
           <div className="appMenuList">
             <ul>
               <li>
@@ -57,6 +58,16 @@ export const LeftMenuBar = (props) => {
               <li>
                 <NavLink to="/staff-attendance" activeclassname="selected">
                   <PeopleAltIcon /> Staff Attendance
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/wallet" activeclassname="selected">
+                  <WalletIcon />Wallet
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/wallet-request" activeclassname="selected">
+                  <WalletIcon />Wallet Request
                 </NavLink>
               </li>
             </ul>
