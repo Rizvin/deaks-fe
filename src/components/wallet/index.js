@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper"
-import { Button, MenuItem, Select, Stack, TableCell, TextField, Chip, FormControl, InputLabel } from "@mui/material";
+import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { UseWalletUserlist } from "./hooks/useWalletServices"
 import { NotificationManager } from "react-notifications";
@@ -21,13 +21,13 @@ export const Wallet = () => {
     const navigate = useNavigate();
     const [hotelData, setHotelData] = useState([]);
     const [outlets, setOutlets] = useState([]);
+    const [totalAmount, setTotalAmount] = useState('');
+    const [totalCount, setTotalCount] = useState('');
     const [initialValues, setInitialValues] = useState({
         "startDate": "2022-11-04T18:30:00.000+00:00",
-        "endDate": "2022-12-18T18:30:00.000+00:00",
-        "status": "",
-        "hotel": "null",
-        "outlet": "null",
-        "searchQuery": "",
+        "endDate": new Date(),
+        "hotel": "",
+        "outlet": "",
     });
     const [userList, setUserList] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState("");
@@ -59,7 +59,6 @@ export const Wallet = () => {
         const param = {
             "startDate": initialValues.startDate,
             "endDate": initialValues.endDate,
-            // "status": initialValues.status,
             "hotel": initialValues.hotel,
             "outlet": initialValues.outlet,
             "pageNum": 1,
@@ -67,15 +66,10 @@ export const Wallet = () => {
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
         }
         UseWalletUserlist(param).then((res) => {
-            console.log(res)
-            if (res?.data[0]?.userList) {
-                setUserList(res?.data[0]?.userList);
-                //     setTotalusers(res?.data?.total_users);
-                //     setTotalDeduct(res?.data?.total_deductions);
-                //     setTotalExtraPay(res?.data?.total_extra_payment);
-                //     setTotalPayment(res?.data?.total_payment);
-                //     setTotalWorkHour(res?.data?.total_working_hours);
-
+            if (res?.data?.userList) {
+                setUserList(res?.data?.userList);
+                setTotalAmount(res?.data?.totalAmount);
+                setTotalCount(res?.data?.totalCount);
             }
         });
     }
@@ -139,27 +133,24 @@ export const Wallet = () => {
     const onclickCancel = () => {
         setInitialValues({
             "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": "2022-12-18T18:30:00.000+00:00",
+            "endDate": new Date(),
             "status": "",
-            "hotel": "null",
-            "outlet": "null",
-            "searchQuery": "",
+            "hotel": "",
+            "outlet": "",
         })
         const param = {
             "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": "2022-12-18T18:30:00.000+00:00",
+            "endDate": new Date(),
             "status": "",
-            "hotel": "null",
-            "outlet": "null",
-            "searchQuery": "",
+            "hotel": "",
+            "outlet": "",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
         }
         UseWalletUserlist(param).then((res) => {
-            console.log(res)
-            if (res?.data[0]?.userList) {
-                setUserList(res?.data[0]?.userList);
+            if (res?.data?.userList) {
+                setUserList(res?.data?.userList);
                 //     setTotalusers(res?.data?.total_users);
                 //     setTotalDeduct(res?.data?.total_deductions);
                 //     setTotalExtraPay(res?.data?.total_extra_payment);
@@ -182,8 +173,8 @@ export const Wallet = () => {
         }
         UseWalletUserlist(param).then((res) => {
             console.log(res)
-            if (res?.data[0]?.userList) {
-                setUserList(res?.data[0]?.userList);
+            if (res?.data?.userList) {
+                setUserList(res?.data?.userList);
                 //     setTotalusers(res?.data?.total_users);
                 //     setTotalDeduct(res?.data?.total_deductions);
                 //     setTotalExtraPay(res?.data?.total_extra_payment);
@@ -260,6 +251,10 @@ export const Wallet = () => {
                     direction="horizontal"
                 />
             </DeaksModal>
+            <div className="attendanceCountDiv">
+                <div className="attendanceCount">Total Amount :{"  " + totalAmount}</div>
+                <div className="staffCount">Total Count : {" " + totalCount}</div>
+            </div>
             <DeaksTable headings={walletHeading}>
                 {userList.map((item, index) => {
                     return (
@@ -279,7 +274,7 @@ export const Wallet = () => {
                                         size="small"
                                         aria-label="delete Hotel"
                                         onClick={() => {
-                                            navigate(`/walletdetails/${item.user_id}/${initialValues.startDate}/${initialValues.endDate}/${initialValues.hotel}/${initialValues.outlet}`)
+                                            navigate(`/walletdetails/${item.user_id}/${initialValues.startDate}/${initialValues.endDate}/${initialValues.hotel ? initialValues.hotel : "nohotel"}/${initialValues.outlet ? initialValues.outlet : 'nooutlet'}`)
                                         }}
                                     >
                                         <VisibilityIcon size="small" />

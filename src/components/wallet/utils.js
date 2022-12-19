@@ -7,6 +7,8 @@ export const walletHeading = [
 export const walletDetailsHeading = [
     { name: "ID" },
     { name: "FULLNAME" },
-    { name: "TOTAL PAYMENT" },
-    { name: "ACTION", width: 50 },
+    { name: "HOTEL" },
+    { name: "OUTLET" },
+    { name: "AMOUNT" },
+    { name: "WALLET BALANCE" },
 ]
