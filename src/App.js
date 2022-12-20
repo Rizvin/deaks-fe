@@ -25,6 +25,7 @@ import { StaffAttendanceEdit } from "./components/staffAttendance/StaffAttendanc
 import NavBar from "./components/navbar/NavBar";
 import { Wallet } from "./components/wallet";
 import { WalletDetails } from "./components/wallet/walletDetails";
+import { WalletRequest } from "./components/walletRequest";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path={"/supportChannel"} element={<SupportChannel />} />
           <Route path={"/wallet"} element={<Wallet />} />
           <Route path={"/walletdetails/:id/:startDate/:endDate/:hotel/:outlet"} element={<WalletDetails />} />
+          <Route path={"/walletrequest"} element={<WalletRequest />} />
         </Route>
       </Routes>
       <NotificationContainer />

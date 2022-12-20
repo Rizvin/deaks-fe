@@ -8,6 +8,7 @@ import { RiShoppingBasketFill } from "react-icons/ri";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import WalletIcon from '@mui/icons-material/Wallet';
+import ApprovalIcon from '@mui/icons-material/Approval';
 
 import "./style/LeftMenuBar.css";
 const logo = require("../../assets/logo.jpg");
@@ -66,8 +67,8 @@ export const LeftMenuBar = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/wallet-request" activeclassname="selected">
-                  <WalletIcon />Wallet Request
+                <NavLink to="/walletrequest" activeclassname="selected">
+                  <ApprovalIcon />Wallet Request
                 </NavLink>
               </li>
             </ul>

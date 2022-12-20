@@ -256,7 +256,7 @@ export const Wallet = () => {
                 <div className="staffCount">Total Count : {" " + totalCount}</div>
             </div>
             <DeaksTable headings={walletHeading}>
-                {userList.map((item, index) => {
+                {userList?.map((item, index) => {
                     return (
                         <StyledTableRow hover role="wallet" tabIndex={-1} key={index}>
                             <TableCell align="left">
