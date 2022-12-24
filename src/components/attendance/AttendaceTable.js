@@ -41,12 +41,11 @@ export const Attendance = () => {
     "outlet": "",
     "searchQuery": "",
   })
+  // eslint-disable-next-line
   useEffect(() => {
     getAllAttendancelist();
-  }, [
-    Paginations.props.rowsPerPage,
-    Paginations.props.page
-  ])
+     // eslint-disable-next-line
+  }, [ Paginations.props.rowsPerPage, Paginations.props.page ])
   //Fetch all hotel details
   const queryParams = React.useMemo(() => {
     return {

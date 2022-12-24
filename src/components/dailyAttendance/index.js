@@ -1,5 +1,5 @@
 import { Chip, TableCell, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { FilterSection } from "../shared/components/FilterSection";
@@ -13,15 +13,15 @@ import moment from "moment";
 
 export const DailyAttendance = () => {
   // const Paginations = usePagination(10);
-  const [fetchPayload, setFetchPayload] = useState({
+  const fetchPayload= {
     date: moment(),
     page_num: 1,
     page_size: 5,
     search_query: "",
     hotel_id: "",
     outlet_id: "",
-  });
-  const { SearchInput, searchKeyword } = useSearch("Search Name");
+  };
+  const { SearchInput } = useSearch("Search Name");
 
   // Query
   const { data: dailyInfo } = useFetchDailyData(fetchPayload);

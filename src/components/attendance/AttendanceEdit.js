@@ -43,6 +43,7 @@ export const AttendanceEdit = () => {
     useEffect(() => {
         userList();
         getAttendanceDataBYId();
+         // eslint-disable-next-line
     }, []);
     const userList = async () => {
         const list = await getUsersList();

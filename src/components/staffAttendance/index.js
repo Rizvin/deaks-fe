@@ -58,6 +58,7 @@ export const StaffAttendance = () => {
   ).format("MMM Do")}`;
   useEffect(() => {
     getAllStaffAttendancelist();
+     // eslint-disable-next-line
   }, [
     Paginations.props.rowsPerPage,
     Paginations.props.page,

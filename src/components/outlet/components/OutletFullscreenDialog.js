@@ -9,9 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import Slide from "@mui/material/Slide";
 import { Field, Formik } from "formik";
-import UploadIcon from "@mui/icons-material/Upload";
 import { AdditionalRowEditModal } from "./AdditionalRowEditModal";
-import { outletModalValidation } from "../utils/outletModalValidation";
 import {
   FormControl,
   Grid,

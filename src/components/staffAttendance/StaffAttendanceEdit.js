@@ -62,6 +62,7 @@ export const StaffAttendanceEdit = () => {
     });
     useEffect(() => {
         getAttendanceDataBYId();
+         // eslint-disable-next-line
     }, []);
     const getAttendanceDataBYId = () => {
         UseStaffAttendenceQuery(attendanceId).then((res) => {
