@@ -26,6 +26,7 @@ import NavBar from "./components/navbar/NavBar";
 import { Wallet } from "./components/wallet";
 import { WalletDetails } from "./components/wallet/walletDetails";
 import { WalletRequest } from "./components/walletRequest";
+import { RedeemList } from "./components/redeem";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path={"/wallet"} element={<Wallet />} />
           <Route path={"/walletdetails/:id/:startDate/:endDate/:hotel/:outlet"} element={<WalletDetails />} />
           <Route path={"/walletrequest"} element={<WalletRequest />} />
+          <Route path={"/Redeemlist"} element={<RedeemList />} />
         </Route>
       </Routes>
       <NotificationContainer />
