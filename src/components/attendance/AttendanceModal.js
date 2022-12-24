@@ -63,7 +63,7 @@ export const AttendanceModal = (props) => {
       setLoading(true);
       if (attendencedata) {
         const {
-          AddStaff,
+          // AddStaff,
           StartTime,
           EndTime,
           PayPerHour,

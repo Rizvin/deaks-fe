@@ -19,7 +19,7 @@ import { LeftMenuBar } from '../navigation/LeftMenuBar ';
 import ProtectedRoute from '../shared/components/ProtectedRoute';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Logout } from './UseNavBar';
-import { Height, Margin } from '@mui/icons-material';
+
 const logo = require("../../assets/logo.jpg");
 
 

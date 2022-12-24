@@ -17,7 +17,6 @@ import { Groups } from "./components/groups";
 import { AddNewSlots } from "./components/slots/components/AddNewSlots";
 import { SlotDetails } from "./components/slots/slotDetails/SlotDetails";
 import { DailyAttendance } from "./components/dailyAttendance";
-import ProtectedRoute from "./components/shared/components/ProtectedRoute";
 import { Attendance } from "./components/attendance/AttendaceTable";
 import { StaffAttendance } from "./components/staffAttendance";
 import { AttendanceEdit } from "./components/attendance/AttendanceEdit"

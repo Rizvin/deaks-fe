@@ -11,7 +11,7 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import ApprovalIcon from '@mui/icons-material/Approval';
 
 import "./style/LeftMenuBar.css";
-const logo = require("../../assets/logo.jpg");
+// const logo = require("../../assets/logo.jpg");
 
 export const LeftMenuBar = (props) => {
   return (

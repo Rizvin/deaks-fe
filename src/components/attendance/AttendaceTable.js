@@ -11,7 +11,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
 import { CloseOutlined, DoneOutlineOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { createPdf, deleteAttendanceItem, downloadPdf, sendAttendance, updateAmend, updateAprove, UseAttendencelist } from './hooks/useAttendence'
+import { createPdf, deleteAttendanceItem, sendAttendance, updateAmend, updateAprove, UseAttendencelist } from './hooks/useAttendence'
 import { getHotels } from "../shared/services/hotelServices";
 import { getOutlets } from "../shared/services/outletServices";
 import { NotificationManager } from "react-notifications";
@@ -45,7 +45,7 @@ export const Attendance = () => {
     getAllAttendancelist();
   }, [
     Paginations.props.rowsPerPage,
-    Paginations.props.page,
+    Paginations.props.page
   ])
   //Fetch all hotel details
   const queryParams = React.useMemo(() => {
@@ -368,9 +368,9 @@ export const Attendance = () => {
                         const name = item.attendanceName;                     
                         createPdf(item._id).then((response) => {
                           //console.log(item.attendanceName,"yjybjyh")
-                            const url = window.URL.createObjectURL(new Blob([response]));
+                            // const url = window.URL.createObjectURL(new Blob([response]));
                             const link = document.createElement('a');
-                            link.href = "http://localhost:5001/api/attendance/download";
+                            link.href = "https://dev-deaks-be-8h2av.ondigitalocean.app/api/attendance/download";
                             link.setAttribute('download', name);
                             document.body.appendChild(link);
                             link.click();
