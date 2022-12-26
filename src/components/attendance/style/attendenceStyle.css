@@ -18,6 +18,14 @@
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
 
+.attendanceFilterRedeemDiv{
+  margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
 .attendanceFilterDiv .card {
   /* background-color: rgb(205, 205, 205);
   color: white; */

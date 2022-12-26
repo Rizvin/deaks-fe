@@ -9,6 +9,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import WalletIcon from '@mui/icons-material/Wallet';
 import ApprovalIcon from '@mui/icons-material/Approval';
+import RedeemIcon from '@mui/icons-material/Redeem';
 
 import "./style/LeftMenuBar.css";
 // const logo = require("../../assets/logo.jpg");
@@ -69,6 +70,11 @@ export const LeftMenuBar = (props) => {
               <li>
                 <NavLink to="/walletrequest" activeclassname="selected">
                   <ApprovalIcon />Wallet Request
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/Redeemlist" activeclassname="selected">
+                  <RedeemIcon />Redeem List
                 </NavLink>
               </li>
             </ul>
