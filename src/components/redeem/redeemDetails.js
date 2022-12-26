@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { ContentWrapper } from "../shared/components/ContentWrapper"
-import { TableCell} from "@mui/material";
+import { TableCell } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { UseRedeemDetails } from "./hooks/index"
 import { walletDetailsHeading } from "./utils"
@@ -11,10 +11,10 @@ import moment from "moment";
 export const RedeemDetails = () => {
     const Paginations = usePagination(20);
     const { id, startDate, endDate } = useParams();
-    const [initialValues, setInitialValues] = useState({
+    const initialValues = {
         "startDate": "2022-11-04T18:30:00.000+00:00",
         "endDate": new Date(),
-    });
+    };
     const [userList, setUserList] = useState([])
     useEffect(() => {
         fetchWalletUserlist();
@@ -56,7 +56,7 @@ export const RedeemDetails = () => {
                                 {item.walletBalance}
                             </TableCell>
                             <TableCell >
-                                { moment(item.createdAt).format('DD-MM-YYYY')}
+                                {moment(item.createdAt).format('DD-MM-YYYY')}
                             </TableCell>
                         </StyledTableRow>
                     )

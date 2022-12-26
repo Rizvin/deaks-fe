@@ -40,7 +40,7 @@ const isSameOrBefore = (StartTime, EndTime) => {
 }
 export const AttendanceModal = (props) => {
   const [loading, setLoading] = useState(false);
-  const { userData, availableattendenceData, attendencedata, setslotUsers, slotUsers, selectedSlot, setModalOpen,getAttendanceDataBYId } = props;
+  const { userData, availableattendenceData, attendencedata, setslotUsers, slotUsers, selectedSlot, setModalOpen, getAttendanceDataBYId } = props;
   const [initialValues, setInitialValues] = useState({
     AttendanceCreatedDate: attendencedata ? attendencedata?.date : availableattendenceData?.date,
     HotelName: attendencedata ? attendencedata.hotelName : availableattendenceData?.hotelName,
@@ -159,20 +159,20 @@ export const AttendanceModal = (props) => {
             InputLabelProps={{ shrink: true, required: true }}
             disabled
           />
-            <TextField
-              id="HotelName"
-              name="HotelName"
-              label="Hotel Name"
-              value={attendencedata?.hotelName??availableattendenceData?.hotelName}
-              disabled
-            />
-            <TextField
-              id="OutletName"
-              name="OutletName"
-              label="Outlet Name"
-              value={attendencedata?.outletName??availableattendenceData?.outletName}
-              disabled
-            />            
+          <TextField
+            id="HotelName"
+            name="HotelName"
+            label="Hotel Name"
+            value={attendencedata?.hotelName ?? availableattendenceData?.hotelName}
+            disabled
+          />
+          <TextField
+            id="OutletName"
+            name="OutletName"
+            label="Outlet Name"
+            value={attendencedata?.outletName ?? availableattendenceData?.outletName}
+            disabled
+          />
           {attendencedata?._id ?
             <TextField
               id="SLOTNAME"
@@ -220,8 +220,8 @@ export const AttendanceModal = (props) => {
                 });
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Select Users" 
-                error={formik.touched.AddStaff && Boolean(formik.errors.AddStaff)}
+                <TextField {...params} label="Select Users"
+                  error={formik.touched.AddStaff && Boolean(formik.errors.AddStaff)}
                   helperText={formik.touched.AddStaff && formik.errors.AddStaff}
                 />
               )}
@@ -381,10 +381,10 @@ export const AttendanceModal = (props) => {
             float: "right",
             width: "110px",
             height: "45px",
-            marginRight:"10px"
+            marginRight: "10px"
           }}
           variant="contained"
-          onClick={()=>{setModalOpen(false);}}
+          onClick={() => { setModalOpen(false); }}
         >
           Cancel
         </Button>

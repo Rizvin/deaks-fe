@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper"
 import { Button, Stack, TableCell, Chip, } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";

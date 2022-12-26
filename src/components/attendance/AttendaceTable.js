@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo,useEffect } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
@@ -35,7 +35,7 @@ export const Attendance = () => {
   const [loading, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
     "startDate": "2022-11-04T18:30:00.000+00:00",
-    "endDate": "2022-11-20T18:30:00.000+00:00",
+    "endDate": new Date(),
     "status": "",
     "hotel": "",
     "outlet": "",
@@ -44,8 +44,8 @@ export const Attendance = () => {
   // eslint-disable-next-line
   useEffect(() => {
     getAllAttendancelist();
-     // eslint-disable-next-line
-  }, [ Paginations.props.rowsPerPage, Paginations.props.page ])
+    // eslint-disable-next-line
+  }, [Paginations.props.rowsPerPage, Paginations.props.page])
   //Fetch all hotel details
   const queryParams = React.useMemo(() => {
     return {
@@ -156,7 +156,7 @@ export const Attendance = () => {
   const onclickCancel = () => {
     setInitialValues({
       "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "endDate": new Date(),
       "status": "",
       "hotel": "",
       "outlet": "",
@@ -164,7 +164,7 @@ export const Attendance = () => {
     })
     const params = {
       "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "endDate": new Date(),
       "status": "",
       "hotel": "",
       "outlet": "",
@@ -215,7 +215,7 @@ export const Attendance = () => {
   return (
     <ContentWrapper headerName="Attendance">
       <div className="attendanceFilterDiv">
-      <Chip
+        <Chip
           icon={<CalendarMonthIcon size="small" />}
           label={dateRangeText}
           onClick={() => {
@@ -342,7 +342,7 @@ export const Attendance = () => {
                     <StyledIconButton
                       size="small"
                       aria-label="delete Hotel"
-                      onClick={()=>{deleteAttendance(item._id)}}
+                      onClick={() => { deleteAttendance(item._id) }}
                     >
                       <DeleteOutlinedIcon size="small" />
                     </StyledIconButton>
@@ -362,21 +362,21 @@ export const Attendance = () => {
                     <StyledIconButton
                       size="small"
                       aria-label="download attendance"
-                      onClick={()=>{
-                      setLoading(!loading)
-                        const name = item.attendanceName;                     
+                      onClick={() => {
+                        setLoading(!loading)
+                        const name = item.attendanceName;
                         createPdf(item._id).then((response) => {
                           //console.log(item.attendanceName,"yjybjyh")
-                            // const url = window.URL.createObjectURL(new Blob([response]));
-                            const link = document.createElement('a');
-                            link.href = "https://dev-deaks-be-8h2av.ondigitalocean.app/api/attendance/download";
-                            link.setAttribute('download', name);
-                            document.body.appendChild(link);
-                            link.click();
-                            // link.parentNode.removeChild(link);
-                            setLoading(false)
-                       })
-                       
+                          // const url = window.URL.createObjectURL(new Blob([response]));
+                          const link = document.createElement('a');
+                          link.href = "https://dev-deaks-be-8h2av.ondigitalocean.app/api/attendance/download";
+                          link.setAttribute('download', name);
+                          document.body.appendChild(link);
+                          link.click();
+                          // link.parentNode.removeChild(link);
+                          setLoading(false)
+                        })
+
                       }}
                     >
                       <DownloadingIcon size="small" />
@@ -386,10 +386,10 @@ export const Attendance = () => {
                       aria-label="send attendance"
                       onClick={() => {
                         setLoading(!loading)
-                        sendAttendance(item._id).then((res)=>{
+                        sendAttendance(item._id).then((res) => {
                           setLoading(false)
                         })
-                        
+
 
                       }}
                     >

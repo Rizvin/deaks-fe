@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react"
 import { ContentWrapper } from "../shared/components/ContentWrapper"
-import { Button, MenuItem, Select, Stack, TableCell, TextField, Chip, FormControl, InputLabel } from "@mui/material";
+import { TableCell } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { UseWalletDetails } from "./hooks/useWalletServices"
 import { walletDetailsHeading } from "./utils"
 import { usePagination } from "../shared/hooks/usePagination";
-import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
+import { StyledTableRow } from "../users/utils/userUtils";
 import { useParams } from "react-router-dom";
 export const WalletDetails = () => {
-    const Paginations = usePagination(20);
+    const [totalCount, setTotalCount] = useState('');
+    const Paginations = usePagination(totalCount);
     const { id, startDate, endDate, hotel, outlet } = useParams();
-    const [initialValues, setInitialValues] = useState({
+    const initialValues = {
         "startDate": "2022-11-04T18:30:00.000+00:00",
         "endDate": new Date(),
         "status": "",
         "hotel": "",
         "outlet": "",
         "searchQuery": "",
-    });
+    };
     const [userList, setUserList] = useState([])
     useEffect(() => {
         fetchWalletUserlist();
@@ -37,15 +38,9 @@ export const WalletDetails = () => {
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
         }
         UseWalletDetails(param).then((res) => {
-            console.log(res)
             if (res?.data) {
                 setUserList(res?.data);
-                //     setTotalusers(res?.data?.total_users);
-                //     setTotalDeduct(res?.data?.total_deductions);
-                //     setTotalExtraPay(res?.data?.total_extra_payment);
-                //     setTotalPayment(res?.data?.total_payment);
-                //     setTotalWorkHour(res?.data?.total_working_hours);
-
+                setTotalCount(res?.data?.length);
             }
         });
     }
@@ -77,6 +72,7 @@ export const WalletDetails = () => {
                     )
                 })}
             </DeaksTable>
+            {Paginations}
         </ContentWrapper>
     )
 }
