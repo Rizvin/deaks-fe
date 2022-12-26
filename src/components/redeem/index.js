@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper"
-import { Button, Stack, TableCell, Chip,} from "@mui/material";
+import { Button, Stack, TableCell, Chip, } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
-import { UseWalletRedeemUserlist} from "./hooks/index"
+import { UseWalletRedeemUserlist } from "./hooks/index"
 import { walletHeading } from "./utils"
 import { usePagination } from "../shared/hooks/usePagination";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
@@ -15,14 +15,14 @@ import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
 
 export const RedeemList = () => {
-    const Paginations = usePagination(20);
     const navigate = useNavigate();
     const [totalAmount, setTotalAmount] = useState('');
     const [totalCount, setTotalCount] = useState('');
+    const Paginations = usePagination(totalCount);
     const [initialValues, setInitialValues] = useState({
         "startDate": "2022-11-04T18:30:00.000+00:00",
         "endDate": new Date(),
-       
+
     });
     const [userList, setUserList] = useState([]);
     const [datePopup, setDatePopup] = useState(false);
@@ -53,7 +53,7 @@ export const RedeemList = () => {
         const param = {
             "startDate": initialValues.startDate,
             "endDate": initialValues.endDate,
-            "name":"",
+            "name": "",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
@@ -65,20 +65,20 @@ export const RedeemList = () => {
                 setTotalCount(res?.data?.totalCount);
             }
         });
-        
+
     }
 
     const onclickCancel = () => {
         setInitialValues({
             "startDate": "2022-11-04T18:30:00.000+00:00",
             "endDate": new Date(),
-            "name":"",
-           
+            "name": "",
+
         })
         const param = {
             "startDate": "2022-11-04T18:30:00.000+00:00",
             "endDate": new Date(),
-            "name":"",
+            "name": "",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
@@ -93,7 +93,7 @@ export const RedeemList = () => {
         const param = {
             "startDate": date?.[0]?.startDate,
             "endDate": date?.[0]?.endDate,
-            "name":"",
+            "name": "",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
@@ -113,7 +113,7 @@ export const RedeemList = () => {
                     onClick={() => {
                         setDatePopup(true);
                     }}
-                />   
+                />
                 <div className="card">
                     <Button onClick={getAllsearchWalletuserlist}>SUBMIT</Button>
                     <Button onClick={onclickCancel}>CANCEL</Button>
@@ -142,7 +142,7 @@ export const RedeemList = () => {
                     return (
                         <StyledTableRow hover role="wallet" tabIndex={-1} key={index}>
                             <TableCell align="left">
-                                {index }
+                                {index}
                             </TableCell>
                             <TableCell align="left">
                                 {item.username}
@@ -167,6 +167,7 @@ export const RedeemList = () => {
                     )
                 })}
             </DeaksTable>
+            {Paginations}
         </ContentWrapper>
     )
 }

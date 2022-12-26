@@ -1,16 +1,16 @@
-import React, { useState, useCallback, useMemo,useEffect } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { NotificationManager } from "react-notifications";
 import { useNavigate } from "react-router-dom";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
-import { Button, MenuItem, Select, Stack, TableCell,  Chip, FormControl, InputLabel } from "@mui/material";
+import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
 import "../attendance/style/attendenceStyle.css";
 import { staffAttendanceHeading } from "./utils";
-import { UseStaffAttendencelist,deleteAttendanceItem } from "./hooks/useSelfAttendance";
+import { UseStaffAttendencelist, deleteAttendanceItem } from "./hooks/useSelfAttendance";
 import { getHotels } from "../shared/services/hotelServices";
 import { getOutlets } from "../shared/services/outletServices";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -21,6 +21,7 @@ import { DateRangePicker } from "react-date-range";
 export const StaffAttendance = () => {
   const navigate = useNavigate();
   const [staffAttendance, setStaffAttendance] = useState([]);
+  const [totalCount, setTotalCount] = useState("");
   const [hotelData, setHotelData] = useState([]);
   const [outlets, setOutlets] = useState([]);
   const [selectedHotel, setSelectedHotel] = useState("");
@@ -38,7 +39,7 @@ export const StaffAttendance = () => {
     "outlet": "",
     "searchQuery": "",
   })
-  const Paginations = usePagination(20);
+  const Paginations = usePagination(totalCount);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -58,16 +59,16 @@ export const StaffAttendance = () => {
   ).format("MMM Do")}`;
   useEffect(() => {
     getAllStaffAttendancelist();
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [
     Paginations.props.rowsPerPage,
     Paginations.props.page,
   ])
-  
+
   const getAllStaffAttendancelist = () => {
     const param = {
-      "startDate":initialValues.startDate,
-      "endDate":initialValues.endDate,
+      "startDate": initialValues.startDate,
+      "endDate": initialValues.endDate,
       "status": initialValues.status,
       "hotel": initialValues.hotel,
       "outlet": initialValues.outlet,
@@ -83,13 +84,14 @@ export const StaffAttendance = () => {
         setTotalExtraPay(res?.data?.total_extra_payment);
         setTotalPayment(res?.data?.total_payment);
         setTotalWorkHour(res?.data?.total_working_hours);
+        setTotalCount(res?.data?.total_records)
 
       }
     });
   }
   const getAllsearchStaffAttendancelist = () => {
     const param = {
-      "startDate":date?.[0]?.startDate,
+      "startDate": date?.[0]?.startDate,
       "endDate": date?.[0]?.endDate,
       "status": initialValues.status,
       "hotel": initialValues.hotel,
@@ -202,17 +204,17 @@ export const StaffAttendance = () => {
       if (res?.message?.code === 200) {
         NotificationManager.success("Deleted Successfully");
         getAllStaffAttendancelist()
-    } else {
+      } else {
         NotificationManager.error("Deletion Failed");
-    }
-     
+      }
+
     })
 
   }
   return (
     <ContentWrapper headerName="Staff Attendance">
-            <div className="attendanceFilterDiv">
-           <Chip
+      <div className="attendanceFilterDiv">
+        <Chip
           icon={<CalendarMonthIcon size="small" />}
           label={dateRangeText}
           onClick={() => {
@@ -319,65 +321,65 @@ export const StaffAttendance = () => {
         {staffAttendance.map((item, index) => {
           return (
             <StyledTableRow hover role="staffattendance" tabIndex={-1} key={index}>
-              <TableCell  align="left">
-                  {item.id}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.attendanceNo}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.fullName}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.contactDetails}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.hotelName}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.outletName}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.date}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.status}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.startTime}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.endTime}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.totalHours}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.hourlyPay}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.totalPay}
-                </TableCell>
-                <TableCell key={`${item._id}`} align="left">
-                  <Stack direction="row" spacing={1}>
-                    <StyledIconButton
-                      size="small"
-                      aria-label="delete Hotel"
-                      onClick={()=>{deleteAttendance(item._id)}}
-                    >
-                      <DeleteOutlinedIcon size="small" />
-                    </StyledIconButton>
-                    <StyledIconButton
-                      size="small"
-                      aria-label="Edit User"
-                      onClick={() => {
-                        navigate(`/staff-attendance-edit/${item._id}`)
-                      }}
-                    >
-                      <ModeEditOutlineOutlined size="small" />
-                    </StyledIconButton>
-                  </Stack>
-                </TableCell>
+              <TableCell align="left">
+                {item.id}
+              </TableCell>
+              <TableCell align="left">
+                {item.attendanceNo}
+              </TableCell>
+              <TableCell align="left">
+                {item.fullName}
+              </TableCell>
+              <TableCell align="left">
+                {item.contactDetails}
+              </TableCell>
+              <TableCell align="left">
+                {item.hotelName}
+              </TableCell>
+              <TableCell align="left">
+                {item.outletName}
+              </TableCell>
+              <TableCell align="left">
+                {item.date}
+              </TableCell>
+              <TableCell align="left">
+                {item.status}
+              </TableCell>
+              <TableCell align="left">
+                {item.startTime}
+              </TableCell>
+              <TableCell align="left">
+                {item.endTime}
+              </TableCell>
+              <TableCell align="left">
+                {item.totalHours}
+              </TableCell>
+              <TableCell align="left">
+                {item.hourlyPay}
+              </TableCell>
+              <TableCell align="left">
+                {item.totalPay}
+              </TableCell>
+              <TableCell key={`${item._id}`} align="left">
+                <Stack direction="row" spacing={1}>
+                  <StyledIconButton
+                    size="small"
+                    aria-label="delete Hotel"
+                    onClick={() => { deleteAttendance(item._id) }}
+                  >
+                    <DeleteOutlinedIcon size="small" />
+                  </StyledIconButton>
+                  <StyledIconButton
+                    size="small"
+                    aria-label="Edit User"
+                    onClick={() => {
+                      navigate(`/staff-attendance-edit/${item._id}`)
+                    }}
+                  >
+                    <ModeEditOutlineOutlined size="small" />
+                  </StyledIconButton>
+                </Stack>
+              </TableCell>
             </StyledTableRow>
           );
         })}

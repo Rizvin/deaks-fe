@@ -17,7 +17,6 @@ import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
 export const Wallet = () => {
-    const Paginations = usePagination(20);
     const navigate = useNavigate();
     const [hotelData, setHotelData] = useState([]);
     const [outlets, setOutlets] = useState([]);
@@ -30,6 +29,7 @@ export const Wallet = () => {
         "outlet": "",
     });
     const [userList, setUserList] = useState([]);
+    const Paginations = usePagination(totalCount);
     const [selectedHotel, setSelectedHotel] = useState("");
     const [datePopup, setDatePopup] = useState(false);
     const [date, setDate] = useState([
@@ -151,6 +151,7 @@ export const Wallet = () => {
         UseWalletUserlist(param).then((res) => {
             if (res?.data?.userList) {
                 setUserList(res?.data?.userList);
+                setTotalCount(res?.data?.totalCount)
                 //     setTotalusers(res?.data?.total_users);
                 //     setTotalDeduct(res?.data?.total_deductions);
                 //     setTotalExtraPay(res?.data?.total_extra_payment);
@@ -285,6 +286,7 @@ export const Wallet = () => {
                     )
                 })}
             </DeaksTable>
+            {Paginations}
         </ContentWrapper>
     )
 }

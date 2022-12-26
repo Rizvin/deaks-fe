@@ -11,8 +11,9 @@ import { UseWalletRequestlist, UseWalletRequestApprovel } from "./hooks/walletRe
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { NotificationManager } from "react-notifications";
 export const WalletRequest = () => {
+    const [totalCount, setTotalCount] = useState('');
     const [requestList, setRequestList] = useState();
-    const Paginations = usePagination(20);
+    const Paginations = usePagination(totalCount);
     useEffect(() => {
         fetchWalletUserlist();
     }, [
@@ -28,6 +29,7 @@ export const WalletRequest = () => {
         UseWalletRequestlist(param).then((res) => {
             if (res?.data) {
                 setRequestList(res?.data);
+                setTotalCount(res?.data?.length)
             }
         });
     }
@@ -73,6 +75,7 @@ export const WalletRequest = () => {
                     )
                 })}
             </DeaksTable>
+            {Paginations}
         </ContentWrapper>
     )
 }
