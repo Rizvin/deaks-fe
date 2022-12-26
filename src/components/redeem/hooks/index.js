@@ -2,12 +2,13 @@ import axios from "axios";
 
 
 //list all the attendence
-export const UseWalletUserlist = async (params) => {
-    const data = await axios.post(`/wallet/userList`, params);
+export const UseWalletRedeemUserlist = async (params) => {
+    const data = await axios.post(`/wallet/userRedeemList`, params);
+    console.log(data)
     return data?.data;
 }
 //list all the attendence
-export const UseWalletDetails = async (params) => {
-    const data = await axios.post(`/wallet/userDetail`, params);
+export const UseRedeemDetails = async (params) => {
+    const data = await axios.post(`/wallet/userRedeems`, params);
     return data?.data;
 }

@@ -1,16 +1,13 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper"
-import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel } from "@mui/material";
+import { Button, Stack, TableCell, Chip,} from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
-import { UseWalletUserlist } from "./hooks/index"
-import { NotificationManager } from "react-notifications";
+import { UseWalletRedeemUserlist} from "./hooks/index"
 import { walletHeading } from "./utils"
 import { usePagination } from "../shared/hooks/usePagination";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
-import { getHotels } from "../shared/services/hotelServices";
-import { getOutlets } from "../shared/services/outletServices";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import moment from "moment";
 import { addDays } from "date-fns";
@@ -20,18 +17,14 @@ import { DateRangePicker } from "react-date-range";
 export const RedeemList = () => {
     const Paginations = usePagination(20);
     const navigate = useNavigate();
-    const [hotelData, setHotelData] = useState([]);
-    const [outlets, setOutlets] = useState([]);
     const [totalAmount, setTotalAmount] = useState('');
     const [totalCount, setTotalCount] = useState('');
     const [initialValues, setInitialValues] = useState({
         "startDate": "2022-11-04T18:30:00.000+00:00",
         "endDate": new Date(),
-        "hotel": "",
-        "outlet": "",
+       
     });
     const [userList, setUserList] = useState([]);
-    const [selectedHotel, setSelectedHotel] = useState("");
     const [datePopup, setDatePopup] = useState(false);
     const [date, setDate] = useState([
         {
@@ -60,51 +53,39 @@ export const RedeemList = () => {
         const param = {
             "startDate": initialValues.startDate,
             "endDate": initialValues.endDate,
-            "hotel": initialValues.hotel,
-            "outlet": initialValues.outlet,
+            "name":"",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
         }
-        UseWalletUserlist(param).then((res) => {
-            if (res?.data?.userList) {
-                console.log(res?.data?.userList);
-                setUserList(res?.data?.userList);
+        UseWalletRedeemUserlist(param).then((res) => {
+            if (res?.data?.users) {
+                setUserList(res?.data?.users);
                 setTotalAmount(res?.data?.totalAmount);
                 setTotalCount(res?.data?.totalCount);
             }
         });
         
     }
-    
-    
+
     const onclickCancel = () => {
         setInitialValues({
             "startDate": "2022-11-04T18:30:00.000+00:00",
             "endDate": new Date(),
-            "status": "",
-            "hotel": "",
-            "outlet": "",
+            "name":"",
+           
         })
         const param = {
             "startDate": "2022-11-04T18:30:00.000+00:00",
             "endDate": new Date(),
-            "status": "",
-            "hotel": "",
-            "outlet": "",
+            "name":"",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
         }
-        UseWalletUserlist(param).then((res) => {
-            if (res?.data?.userList) {
-                setUserList(res?.data?.userList);
-                //     setTotalusers(res?.data?.total_users);
-                //     setTotalDeduct(res?.data?.total_deductions);
-                //     setTotalExtraPay(res?.data?.total_extra_payment);
-                //     setTotalPayment(res?.data?.total_payment);
-                //     setTotalWorkHour(res?.data?.total_working_hours);
-
+        UseWalletRedeemUserlist(param).then((res) => {
+            if (res?.data?.users) {
+                setUserList(res?.data?.users);
             }
         });
     }
@@ -112,23 +93,14 @@ export const RedeemList = () => {
         const param = {
             "startDate": date?.[0]?.startDate,
             "endDate": date?.[0]?.endDate,
-            "status": initialValues.status,
-            "hotel": initialValues.hotel,
-            "outlet": initialValues.outlet,
+            "name":"",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,
             "skip": Paginations.props.page * Paginations.props.rowsPerPage,
         }
-        UseWalletUserlist(param).then((res) => {
-            console.log(res)
-            if (res?.data?.userList) {
-                setUserList(res?.data?.userList);
-                //     setTotalusers(res?.data?.total_users);
-                //     setTotalDeduct(res?.data?.total_deductions);
-                //     setTotalExtraPay(res?.data?.total_extra_payment);
-                //     setTotalPayment(res?.data?.total_payment);
-                //     setTotalWorkHour(res?.data?.total_working_hours);
-
+        UseWalletRedeemUserlist(param).then((res) => {
+            if (res?.data?.users) {
+                setUserList(res?.data?.users);
             }
         });
     }
@@ -141,8 +113,7 @@ export const RedeemList = () => {
                     onClick={() => {
                         setDatePopup(true);
                     }}
-                />
-                
+                />   
                 <div className="card">
                     <Button onClick={getAllsearchWalletuserlist}>SUBMIT</Button>
                     <Button onClick={onclickCancel}>CANCEL</Button>
@@ -171,13 +142,13 @@ export const RedeemList = () => {
                     return (
                         <StyledTableRow hover role="wallet" tabIndex={-1} key={index}>
                             <TableCell align="left">
-                                {index}
+                                {index }
                             </TableCell>
                             <TableCell align="left">
-                                {item.user}
+                                {item.username}
                             </TableCell>
                             <TableCell align="left">
-                                {item.totalAmount}
+                                {item.amount}
                             </TableCell>
                             <TableCell key={`${item.user_id}`} align="left">
                                 <Stack direction="row" spacing={1}>
@@ -185,7 +156,7 @@ export const RedeemList = () => {
                                         size="small"
                                         aria-label="delete Hotel"
                                         onClick={() => {
-                                            navigate(`/walletdetails/${item.user_id}/${initialValues.startDate}/${initialValues.endDate}/${initialValues.hotel ? initialValues.hotel : "nohotel"}/${initialValues.outlet ? initialValues.outlet : 'nooutlet'}`)
+                                            navigate(`/redeemdetails/${item.user_id}/${initialValues.startDate}/${initialValues.endDate}}`)
                                         }}
                                     >
                                         <VisibilityIcon size="small" />
