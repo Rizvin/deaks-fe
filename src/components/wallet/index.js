@@ -16,6 +16,7 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
+import { SpecialPay } from "./specialPayModal";
 export const Wallet = () => {
     const navigate = useNavigate();
     const [hotelData, setHotelData] = useState([]);
@@ -32,6 +33,7 @@ export const Wallet = () => {
     const Paginations = usePagination(totalCount);
     const [selectedHotel, setSelectedHotel] = useState("");
     const [datePopup, setDatePopup] = useState(false);
+    const [open, setOpen] = useState(false);
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -152,12 +154,6 @@ export const Wallet = () => {
             if (res?.data?.userList) {
                 setUserList(res?.data?.userList);
                 setTotalCount(res?.data?.totalCount)
-                //     setTotalusers(res?.data?.total_users);
-                //     setTotalDeduct(res?.data?.total_deductions);
-                //     setTotalExtraPay(res?.data?.total_extra_payment);
-                //     setTotalPayment(res?.data?.total_payment);
-                //     setTotalWorkHour(res?.data?.total_working_hours);
-
             }
         });
     }
@@ -176,12 +172,6 @@ export const Wallet = () => {
             console.log(res)
             if (res?.data?.userList) {
                 setUserList(res?.data?.userList);
-                //     setTotalusers(res?.data?.total_users);
-                //     setTotalDeduct(res?.data?.total_deductions);
-                //     setTotalExtraPay(res?.data?.total_extra_payment);
-                //     setTotalPayment(res?.data?.total_payment);
-                //     setTotalWorkHour(res?.data?.total_working_hours);
-
             }
         });
     }
@@ -251,6 +241,23 @@ export const Wallet = () => {
                     ranges={date}
                     direction="horizontal"
                 />
+            </DeaksModal>
+            <div className="attendanceCountDiv">
+                <div className="staffCount" onClick={() => setOpen(true)}>Add Special Pay</div>
+            </div>
+            <DeaksModal
+                modalOpen={open}
+                setModalOpen={setOpen}
+                modalHeader="Add Special Rate"
+            >
+                <SpecialPay modalOpen={open}
+                    setModalOpen={setOpen}
+                    hotelData={hotelData}
+                    selectedHotel={selectedHotel}
+                    setSelectedHotel={setSelectedHotel}
+                    outlets={outlets}
+                    fetchOutlets={fetchOutlets} />
+
             </DeaksModal>
             <div className="attendanceCountDiv">
                 <div className="attendanceCount">Total Amount :{"  " + totalAmount}</div>

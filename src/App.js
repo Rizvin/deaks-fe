@@ -27,6 +27,7 @@ import { WalletDetails } from "./components/wallet/walletDetails";
 import { WalletRequest } from "./components/walletRequest";
 import { RedeemList } from "./components/redeem";
 import { RedeemDetails } from "./components/redeem/redeemDetails";
+import { Dispute } from "./components/dispute";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path={"/walletrequest"} element={<WalletRequest />} />
           <Route path={"/Redeemlist"} element={<RedeemList />} />
           <Route path={"/redeemdetails/:id/:startDate/:endDate"} element={<RedeemDetails />} />
+          <Route path={"/disputelist"} element={<Dispute />} />
         </Route>
       </Routes>
       <NotificationContainer />
