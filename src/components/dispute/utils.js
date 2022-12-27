@@ -1,8 +1,7 @@
 export const disputeHeading = [
     { name: "ID" },
     { name: "FULLNAME" },
-    { name: "HOTEL" },
-    { name: "OUTLET" },
     { name: "AMOUNT" },
-    { name: "WALLET BALANCE" },
+    { name: "DISPUTE NOTES" },
+    { name: "ACTION", width: 50 },
 ]
