@@ -317,6 +317,7 @@ export const Attendance = () => {
       <div className="attendanceSearchDiv">
         <TextField size="small"
           name="searchQuery"
+          placeholder="Search here..."
           onChange={handleChange}
           value={initialValues.searchQuery} />
       </div>

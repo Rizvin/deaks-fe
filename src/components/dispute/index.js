@@ -55,7 +55,7 @@ export const Dispute = () => {
     return (
         <ContentWrapper headerName="Dispute List">
             <DeaksTable headings={disputeHeading}>
-                {userList.map((item, index) => {
+                {userList?.map((item, index) => {
                     return (
                         <StyledTableRow hover role="staffattendance" tabIndex={-1} key={index}>
                             <TableCell align="left">
@@ -92,7 +92,7 @@ export const Dispute = () => {
                     );
                 })}
             </DeaksTable>
-
+            {Paginations}
         </ContentWrapper>
     )
 }

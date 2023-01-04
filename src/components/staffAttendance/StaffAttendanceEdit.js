@@ -1,4 +1,4 @@
-import { Button, TextField, FormControl, MenuItem, Select, InputLabel,Typography } from "@mui/material";
+import { Button, TextField, FormControl, MenuItem, Select, InputLabel, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState, useEffect } from "react";
 import Backdrops from "../shared/components/Backdrops";
@@ -62,7 +62,7 @@ export const StaffAttendanceEdit = () => {
     });
     useEffect(() => {
         getAttendanceDataBYId();
-         // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []);
     const getAttendanceDataBYId = () => {
         UseStaffAttendenceQuery(attendanceId).then((res) => {
@@ -127,7 +127,7 @@ export const StaffAttendanceEdit = () => {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-            <Typography className="heading">Edit Staff Attendance </Typography>
+                <Typography className="heading">Edit Invoice </Typography>
                 <div className="selfAttendanceFormWrapper">
                     <TextField
                         id="attendanceNo"
@@ -208,7 +208,7 @@ export const StaffAttendanceEdit = () => {
                             id="status"
                             onChange={handleChange}
                             label="Attendance Status"
-                            InputLabelProps={{required: true }}
+                            InputLabelProps={{ required: true }}
                             InputProps={{ sx: { height: 55 } }}
                         >
                             <MenuItem size="small" value={"PENDING"}>
@@ -257,7 +257,7 @@ export const StaffAttendanceEdit = () => {
                         onChange={handleChange}
                         value={formik.values.breakTime}
                         InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <TextField
                         id="hourlyPay"
@@ -281,7 +281,7 @@ export const StaffAttendanceEdit = () => {
                         onChange={handleChange}
                         value={formik.values.extraPay}
                         InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <TextField
                         id="deduction"
@@ -292,7 +292,7 @@ export const StaffAttendanceEdit = () => {
                         onChange={handleChange}
                         value={formik.values.deduction}
                         InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <TextField
                         id="remarks"
@@ -303,38 +303,38 @@ export const StaffAttendanceEdit = () => {
                         value={formik.values.remarks}
                         onChange={handleChange}
                         InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <div>
                     </div>
-                    </div>
-                    <Button
-                        sx={{
-                            background: "#d21991",
-                            float: "right",
-                            width: "110px",
-                            height: "45px",
-                            marginLeft: "10px"
-                        }}
-                        variant="contained"
-                        onClick={() => { navigate(`/staff-attendance`) }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        sx={{
-                            background: "#1976d2",
-                             float: "right",
-                            width: "110px",
-                            height: "45px",
-                        }}
-                        variant="contained"
-                        type="submit"
-                    >
-                        Save
-                    </Button>
-                    
-               
+                </div>
+                <Button
+                    sx={{
+                        background: "#d21991",
+                        float: "right",
+                        width: "110px",
+                        height: "45px",
+                        marginLeft: "10px"
+                    }}
+                    variant="contained"
+                    onClick={() => { navigate(`/staff-attendance`) }}
+                >
+                    Cancel
+                </Button>
+                <Button
+                    sx={{
+                        background: "#1976d2",
+                        float: "right",
+                        width: "110px",
+                        height: "45px",
+                    }}
+                    variant="contained"
+                    type="submit"
+                >
+                    Save
+                </Button>
+
+
                 <Backdrops open={loading} />
             </form>
         </div>
