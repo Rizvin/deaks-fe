@@ -268,7 +268,7 @@ export const Wallet = () => {
                     return (
                         <StyledTableRow hover role="wallet" tabIndex={-1} key={index}>
                             <TableCell align="left">
-                                {index}
+                                {index + 1}
                             </TableCell>
                             <TableCell align="left">
                                 {item.user}
