@@ -1,9 +1,9 @@
 body{background-image:linear-gradient(to right bottom, #f6f6ff, #f3f3ff, #f0f0ff, #ecedff, #e9eaff);background-repeat:no-repeat;height:100%}
 .applicationWrapper{display:grid;grid-template-columns:1fr 7fr; overflow-y:scroll;}
 .applicationWrapper .appLogo{border-radius:20px;margin:27px auto;height:80px;width:80px;display:flex;border:2px solid #c3af76}
-.applicationWrapper .menubarParent .menubarWrapper{background-color:#ffffff;height:100vh;width:160px;position:fixed}
+.applicationWrapper .menubarParent .menubarWrapper{background-color:#ffffff;height:100vh;width:200px;position:fixed}
 .applicationWrapper .appMenuList{margin-top:0px}
 .applicationWrapper .appMenuList ul{padding:0}
-.applicationWrapper .appMenuList ul a{display:flex;align-items:center;text-transform:capitalize;padding:5px 20px;list-style:none;margin:10px;color:rgb(2, 2, 2);font-size:14px;display:flex}
-.applicationWrapper .appMenuList ul a svg{margin-right:6px}
-.applicationWrapper .appMenuList ul li .active{border-radius:20px;border:2px solid #c3af76;background:#c2bdbd}.iconLeftBar{font-size:21px}.addNewWrapper{display:flex;gap:10px;margin:17px 0}
+.applicationWrapper .appMenuList ul a{display:flex;align-items:center;text-transform:capitalize;padding:2px 15px;list-style:none;margin:10px;color:rgb(2, 2, 2);font-size:12px;display:flex}
+.applicationWrapper .appMenuList ul a svg{margin-right:6px;font-size:20px}
+.applicationWrapper .appMenuList ul li .active{border-radius:20px;border:2px solid #c3af76;background:#c2bdbd}.iconLeftBar{font-size:18px}.addNewWrapper{display:flex;gap:10px;margin:17px 0}

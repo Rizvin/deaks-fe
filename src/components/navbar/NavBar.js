@@ -24,7 +24,7 @@ const logo = require("../../assets/logo.jpg");
 
 
 
-const drawerWidth = 160;
+const drawerWidth = 200;
 
 const darkTheme = createTheme({
   palette: {
