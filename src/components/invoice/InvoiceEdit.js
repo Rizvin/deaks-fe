@@ -5,7 +5,6 @@ import Backdrops from "../shared/components/Backdrops";
 import * as Yup from 'yup';
 import { NotificationManager } from "react-notifications";
 import { useNavigate, useParams } from "react-router-dom";
-import moment from "moment"
 import { patchInvoice, UseinvoiceQuery } from "./hooks/invoiceServices";
 import '../staffAttendance/style/selfAttendanceStyle.css'
 const FormValidation = Yup.object().shape({
@@ -14,43 +13,38 @@ export const InvoiceEdit = () => {
     const { invoiceId } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [initialPayment, setInitialPayment] = useState(false)
+    const [finalPayment, setFinalPayment] = useState(false)
     const [initialValues, setInitialValues] = useState({
         invoiceUID: "",
         totalAmount: "",
         invoiceDate: "",
         status: "",
-        date: "",
-        initial_payment: false,
-        initial_date: '',
-        initial_pay: '',
-        final_payment: '',
-        final_pay: '',
-        final_date: ''
+        initialDate: '',
+        initialPay: '',
+        finalPay: '',
+        finalDate: '',
+        receivedDate: ''
     });
     useEffect(() => {
-        getAttendanceDataBYId();
+        getInvoiceDataBYId();
         // eslint-disable-next-line
     }, []);
-    const getAttendanceDataBYId = () => {
+    const getInvoiceDataBYId = () => {
         UseinvoiceQuery(invoiceId).then((res) => {
             if (res.message && res.message.code === 200 && res.data) {
                 setInitialValues({
                     invoiceUID: res.data.invoiceUID,
                     totalAmount: res.data.totalAmount,
                     invoiceDate: res.data.invoiceDate,
-                    outletName: res.data.outletName,
                     status: res.data.status,
-                    date: res.data.date,
-                    breakTime: res.data.breakTime,
-                    contactDetails: res.data.contactDetails,
-                    deduction: res.data.deduction,
-                    endTime: res.data.endTime,
-                    extraPay: res.data.extraPay,
-                    fullName: res.data.fullName,
-                    hourlyPay: res.data.hourlyPay,
-                    startTime: res.data.startTime,
-                    totalHours: res.data.totalHours,
-                    remarks: res.data.remarks,
+                    initialPayment: false,
+                    initialDate: res.data.initialDate,
+                    initialPay: res.data.initialAmount,
+                    finalPayment: false,
+                    finalPay: res.data.finalAmount,
+                    finalDate: res.data.finalDate,
+                    receivedDate: res.data.receivedDate
                 })
             }
         });
@@ -65,11 +59,11 @@ export const InvoiceEdit = () => {
                 const data = {
                     "invoice_id": invoiceId,
                     "status": values.status,
-                    "initial_payment": values.initial_payment,
-                    "final_payment": values.final_payment,
-                    "initial_date": values.initial_date,
-                    "final_date": values.final_date,
-                    "received_date": values.received_date,
+                    "initial_payment": values?.initialPay,
+                    "final_payment": values?.finalPay,
+                    "initial_date": values?.initialDate,
+                    "final_date": values?.finalDate,
+                    "received_date": values.receivedDate,
                 }
                 patchInvoice(data).then((res) => {
                     setLoading(false);
@@ -84,8 +78,13 @@ export const InvoiceEdit = () => {
         }
     });
     const handleChange = (e) => {
-        console.log(e)
         const { name, value } = e.target;
+        if (name === "initialPayment") {
+            setInitialPayment(!initialPayment);
+        }
+        if (name === "finalPayment") {
+            setFinalPayment(!finalPayment);
+        }
         setInitialValues((prev) => {
             return { ...prev, [name]: value }
         })
@@ -124,6 +123,7 @@ export const InvoiceEdit = () => {
                         label="Invoice Date"
                         size="small"
                         value={formik.values.invoiceDate}
+                        onChange={handleChange}
                         InputProps={{ sx: { height: 55 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                     />
@@ -158,12 +158,13 @@ export const InvoiceEdit = () => {
                         </Select>
                     </FormControl>
                     <TextField
-                        id="invoiceDate"
-                        name="invoiceDate"
+                        id="receivedDate"
+                        name="receivedDate"
                         type="date"
                         label="Received Date"
+                        onChange={handleChange}
                         size="small"
-                        value={formik.values.invoiceDate}
+                        value={formik.values.receivedDate}
                         InputProps={{ sx: { height: 55 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                     />
@@ -171,8 +172,8 @@ export const InvoiceEdit = () => {
                         <>
                             <FormControlLabel
                                 control={<Switch
-                                    name="initial_payment"
-                                    checked={initialValues.initial_payment}
+                                    name="initialPayment"
+                                    checked={initialPayment}
                                     onChange={handleChange}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />}
@@ -180,19 +181,21 @@ export const InvoiceEdit = () => {
 
                         </>
                     }
-                    {initialValues.initial_payment && <><TextField
-                        id="initial_date"
-                        name="initial_date"
+                    {initialPayment && <><TextField
+                        id="initialDate"
+                        name="initialDate"
                         type="date"
+                        onChange={handleChange}
                         label="Initial payment Date"
                         size="small"
-                        value={formik.values.initial_date}
+                        value={formik.values.initialDate}
                         InputProps={{ sx: { height: 55 } }}
                         InputLabelProps={{ shrink: true, required: true }} /><TextField
                             id="initial_pay"
                             name="initial_pay"
                             type="number"
                             label="Final Pay Amount"
+                            onChange={handleChange}
                             size="small"
                             value={formik.values.initial_pay}
                             InputProps={{ sx: { height: 55 } }}
@@ -201,8 +204,8 @@ export const InvoiceEdit = () => {
                         <>
                             <FormControlLabel
                                 control={<Switch
-                                    name="final_payment"
-                                    checked={initialValues.final_payment}
+                                    name="finalPayment"
+                                    checked={finalPayment}
                                     onChange={handleChange}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />}
@@ -210,23 +213,25 @@ export const InvoiceEdit = () => {
 
                         </>
                     }
-                    {initialValues.final_payment && <>
+                    {finalPayment && <>
                         <TextField
-                            id="final_date"
-                            name="final_date"
+                            id="finalDate"
+                            name="finalDate"
+                            onChange={handleChange}
                             type="date"
                             label="Final payment Date"
                             size="small"
-                            value={formik.values.final_date}
+                            value={formik.values.finalDate}
                             InputProps={{ sx: { height: 55 } }}
                             InputLabelProps={{ shrink: true, required: true }} />
                         <TextField
-                            id="final_pay"
-                            name="final_pay"
+                            id="finalPay"
+                            name="finalPay"
                             type="number"
                             label="Final Pay Amount"
+                            onChange={handleChange}
                             size="small"
-                            value={formik.values.final_pay}
+                            value={formik.values.finalPay}
                             InputProps={{ sx: { height: 55 } }}
                             InputLabelProps={{ shrink: true, required: true }} /></>}
 
@@ -240,7 +245,7 @@ export const InvoiceEdit = () => {
                         marginLeft: "10px"
                     }}
                     variant="contained"
-                    onClick={() => { navigate(`/staff-attendance`) }}
+                    onClick={() => { navigate(`/invoicelist`) }}
                 >
                     Cancel
                 </Button>
@@ -256,8 +261,6 @@ export const InvoiceEdit = () => {
                 >
                     Save
                 </Button>
-
-
                 <Backdrops open={loading} />
             </form>
         </div>
