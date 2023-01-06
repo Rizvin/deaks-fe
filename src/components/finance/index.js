@@ -123,7 +123,7 @@ export const Finance = () => {
   }
 
   return (
-    <ContentWrapper headerName="Attendance">
+    <ContentWrapper headerName="Finance">
       <div className="attendanceFilterDiv">
       <Chip
           icon={<CalendarMonthIcon size="small" />}
