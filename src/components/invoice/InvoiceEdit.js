@@ -56,14 +56,23 @@ export const InvoiceEdit = () => {
         onSubmit: async (values) => {
             console.log(values);
             if (invoiceId) {
-                const data = {
-                    "invoice_id": invoiceId,
-                    "status": values.status,
-                    "initial_payment": values?.initialPay,
-                    "final_payment": values?.finalPay,
-                    "initial_date": values?.initialDate,
-                    "final_date": values?.finalDate,
-                    "received_date": values.receivedDate,
+                var data = null;
+                if (values.status === 'RECEIVED BY THIRD PARTY') {
+                    data = {
+                        "invoice_id": invoiceId,
+                        "status": values.status,
+                        "initial_payment": initialPayment,
+                        "final_payment": finalPayment,
+                        "initial_date": values?.initialDate,
+                        "final_date": values?.finalDate,
+                        "received_date": values.receivedDate,
+                    }
+                } else {
+                    data = {
+                        "invoice_id": invoiceId,
+                        "status": values.status,
+                        "received_date": values.receivedDate,
+                    }
                 }
                 patchInvoice(data).then((res) => {
                     setLoading(false);
@@ -149,8 +158,8 @@ export const InvoiceEdit = () => {
                             <MenuItem size="small" value={"SUBMITTED"}>
                                 SUBMITTED
                             </MenuItem>
-                            <MenuItem size="small" value={"RECEIVED"}>
-                                RECEIVED
+                            <MenuItem size="small" value={"RECEIVED BACK"}>
+                                RECEIVED BACK
                             </MenuItem>
                             <MenuItem size="small" value={"RECEIVED BY THIRD PARTY"}>
                                 RECEIVED BY THIRD PARTY
@@ -181,7 +190,7 @@ export const InvoiceEdit = () => {
 
                         </>
                     }
-                    {initialPayment && <><TextField
+                    {initialPayment && initialValues.status === 'RECEIVED BY THIRD PARTY' && <><TextField
                         id="initialDate"
                         name="initialDate"
                         type="date"
@@ -194,10 +203,10 @@ export const InvoiceEdit = () => {
                             id="initial_pay"
                             name="initial_pay"
                             type="number"
-                            label="Final Pay Amount"
+                            label="Initial Pay Amount"
                             onChange={handleChange}
                             size="small"
-                            value={formik.values.initial_pay}
+                            value={formik.values.initialPay}
                             InputProps={{ sx: { height: 55 } }}
                             InputLabelProps={{ shrink: true, required: true }} /></>}
                     {initialValues.status === 'RECEIVED BY THIRD PARTY' &&
@@ -213,7 +222,7 @@ export const InvoiceEdit = () => {
 
                         </>
                     }
-                    {finalPayment && <>
+                    {finalPayment && initialValues.status === 'RECEIVED BY THIRD PARTY' && <>
                         <TextField
                             id="finalDate"
                             name="finalDate"
