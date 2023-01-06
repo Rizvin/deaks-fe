@@ -1,4 +1,4 @@
-import React, { useState, useMemo,useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
@@ -39,8 +39,8 @@ export const PendingFinance = () => {
     }
     UsePendingFinancelist(param).then((res) => {
       console.log(res.data);
-      if (res?.data?.finance_list) {
-        setPendingFinanceData(res?.data?.finance_list);
+      if (res?.data) {
+        setPendingFinanceData(res?.data);
         setTotalCount(totalCount)
       }
     });
@@ -49,8 +49,8 @@ export const PendingFinance = () => {
 
   const deleteFinance = (id) => {
     //deleteAttendanceItem(id).then((res) => {
-      getAllPendingFinancelist()
-  //  })
+    getAllPendingFinancelist()
+    //  })
 
   }
 
@@ -72,7 +72,7 @@ export const PendingFinance = () => {
                   {item.subCategory}
                 </TableCell>
                 <TableCell align="left">
-                  {item.description}
+                  {item.amount}
                 </TableCell>
                 <TableCell align="left">
                   {item.remarks}
@@ -80,13 +80,13 @@ export const PendingFinance = () => {
                 <TableCell align="left">
                   {item.transactionDate}
                 </TableCell>
-                
+
                 <TableCell align="left">
                   <Stack direction="row" spacing={1}>
                     <StyledIconButton
                       size="small"
                       aria-label="delete Hotel"
-                      onClick={()=>{deleteFinance(item._id)}}
+                      onClick={() => { deleteFinance(item._id) }}
                     >
                       <DeleteOutlinedIcon size="small" />
                     </StyledIconButton>
@@ -101,7 +101,7 @@ export const PendingFinance = () => {
                   </StyledIconButton> : <StyledIconButton
                     size="small"
                     aria-label="approve by devjith"
-                    // onClick={() => { amending(item._id) }}
+                  // onClick={() => { amending(item._id) }}
                   >
                     <CloseOutlined size="small" />
                   </StyledIconButton>}
@@ -115,7 +115,7 @@ export const PendingFinance = () => {
                   </StyledIconButton> : <StyledIconButton
                     size="small"
                     aria-label="aprove by ashik"
-                    // onClick={() => { aproving(item._id) }}
+                  // onClick={() => { aproving(item._id) }}
                   >
                     <CloseOutlined size="small" />
                   </StyledIconButton>}
