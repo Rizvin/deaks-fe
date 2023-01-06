@@ -14,6 +14,7 @@ import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import MailIcon from '@mui/icons-material/Mail';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import "./style/LeftMenuBar.css";
 // const logo = require("../../assets/logo.jpg");
 
@@ -98,6 +99,11 @@ export const LeftMenuBar = (props) => {
               <li>
                 <NavLink to="/financetable" activeclassname="selected">
                   <MonetizationOnIcon />Finance
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/pendingfinancetable" activeclassname="selected">
+                  <PendingActionsIcon />Pending Finance
                 </NavLink>
               </li>
             </ul>

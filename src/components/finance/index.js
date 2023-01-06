@@ -21,8 +21,6 @@ export const Finance = () => {
   const [totalCount, setTotalCount] = useState("");
   const [financeData, setFinanceData] = useState([]);
   const Paginations = usePagination(totalCount);
-
-
   const [datePopup, setDatePopup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
@@ -66,6 +64,7 @@ export const Finance = () => {
       console.log(res.data);
       if (res?.data?.finance_list) {
         setFinanceData(res?.data?.finance_list);
+        setTotalCount(res?.data?.totalCount)
       }
     });
   }
@@ -82,6 +81,7 @@ export const Finance = () => {
       console.log(res.data);
       if (res?.data?.finance_list) {
         setFinanceData(res?.data?.finance_list);
+        setTotalCount(res?.data?.totalCount)
       }
     });
   }
@@ -102,6 +102,7 @@ export const Finance = () => {
     UseFinancelist(params).then((res) => {
       if (res?.data?.finance_list) {
         setFinanceData(res?.data?.finance_list);
+        setTotalCount(res?.data?.totalCount)
       }
     });
   }
