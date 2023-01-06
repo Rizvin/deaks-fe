@@ -31,6 +31,7 @@ import { Dispute } from "./components/dispute";
 import { Invoice } from "./components/invoice";
 import { InvoiceEdit } from "./components/invoice/InvoiceEdit";
 import { SOA } from "./components/soa";
+import { Finance } from "./components/finance";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
           <Route path={"/invoicelist"} element={<Invoice />} />
           <Route path={"/invoicedetails/:invoiceId"} element={<InvoiceEdit />} />
           <Route path={"/soalist"} element={<SOA />} />
+          <Route path={"/financetable"} element={<Finance />} />
         </Route>
       </Routes>
       <NotificationContainer />
