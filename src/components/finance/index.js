@@ -1,4 +1,4 @@
-import React, { useState, useMemo,useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
@@ -16,12 +16,16 @@ import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
 import { UseFinancelist } from "./hooks/useFinanceServices";
+import { AddFinance } from "./addFinance";
+import { CatagoryModal } from "../catagory";
 export const Finance = () => {
   const navigate = useNavigate();
   const [totalCount, setTotalCount] = useState("");
   const [financeData, setFinanceData] = useState([]);
   const Paginations = usePagination(totalCount);
   const [datePopup, setDatePopup] = useState(false);
+  const [financePopup, setFinancePopup] = useState(false);
+  const [catagoryPopup, setCatagoryPopup] = useState(false)
   const [loading, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
     "startDate": "2022-11-04T18:30:00.000+00:00",
@@ -109,8 +113,8 @@ export const Finance = () => {
 
   const deleteFinance = (id) => {
     //deleteAttendanceItem(id).then((res) => {
-      getAllFinancelist()
-  //  })
+    getAllFinancelist()
+    //  })
 
   }
   const handleChange = (e) => {
@@ -126,7 +130,7 @@ export const Finance = () => {
   return (
     <ContentWrapper headerName="Finance">
       <div className="attendanceFilterDiv">
-      <Chip
+        <Chip
           icon={<CalendarMonthIcon size="small" />}
           label={dateRangeText}
           onClick={() => {
@@ -157,11 +161,27 @@ export const Finance = () => {
         <div className="staffCount">Total Staff Working : {" " + totalStaff}</div>
       </div> */}
       <div className="attendanceSearchDiv">
+        <Button onClick={() => setFinancePopup(true)}>Add Finance</Button>
+        <Button onClick={() => { setCatagoryPopup(true) }}>Add Catagory</Button>
         <TextField size="small"
           name="searchQuery"
           onChange={handleChange}
           value={initialValues.searchQuery} />
       </div>
+      <DeaksModal
+        modalOpen={financePopup}
+        setModalOpen={setFinancePopup}
+        modalHeader="Add Finance"
+      >
+        <AddFinance setModalOpen={setFinancePopup} />
+      </DeaksModal>
+      <DeaksModal
+        modalOpen={catagoryPopup}
+        setModalOpen={setCatagoryPopup}
+        modalHeader="Add Catagory"
+      >
+        <CatagoryModal setModalOpen={setCatagoryPopup} />
+      </DeaksModal>
       <DeaksTable headings={financeHeading}>
         {financeData?.map((item) => {
           return (
@@ -188,13 +208,13 @@ export const Finance = () => {
                 <TableCell align="left">
                   {item.transactionDate}
                 </TableCell>
-                
+
                 <TableCell align="left">
                   <Stack direction="row" spacing={1}>
                     <StyledIconButton
                       size="small"
                       aria-label="delete Hotel"
-                      onClick={()=>{deleteFinance(item._id)}}
+                      onClick={() => { deleteFinance(item._id) }}
                     >
                       <DeleteOutlinedIcon size="small" />
                     </StyledIconButton>

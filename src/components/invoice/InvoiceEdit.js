@@ -101,7 +101,7 @@ export const InvoiceEdit = () => {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-                <Typography className="heading">Edit Staff Attendance </Typography>
+                <Typography className="heading">Edit Invoice </Typography>
                 <div className="selfAttendanceFormWrapper">
                     <TextField
                         id="invoiceUID"
