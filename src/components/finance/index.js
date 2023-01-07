@@ -6,7 +6,7 @@ import "./style/financeStyle.css";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import { financeHeading } from "./utils";
 import Backdrops from "../shared/components/Backdrops";
-import { Button, Stack, TableCell, TextField, Chip } from "@mui/material";
+import { Button, Stack, TableCell, TextField, Chip, FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { useNavigate } from "react-router-dom";
 import { NotificationManager } from "react-notifications";
@@ -15,7 +15,7 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
-import { UseFinancelist } from "./hooks/useFinanceServices";
+import { getListSubcategories, UseFinancelist } from "./hooks/useFinanceServices";
 import { AddFinance } from "./addFinance";
 import { CatagoryModal } from "../catagory";
 export const Finance = () => {
@@ -25,7 +25,10 @@ export const Finance = () => {
   const Paginations = usePagination(totalCount);
   const [datePopup, setDatePopup] = useState(false);
   const [financePopup, setFinancePopup] = useState(false);
-  const [catagoryPopup, setCatagoryPopup] = useState(false)
+  const [catagoryPopup, setCatagoryPopup] = useState(false);
+  const [catagory, setcatagory] = useState('')
+  const [subcategoryName, setSubCategoryName] = useState('')
+  const [subCatagory, setSubcatagory] = useState([])
   const [loading, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
     "startDate": "2022-11-04T18:30:00.000+00:00",
@@ -122,11 +125,27 @@ export const Finance = () => {
     setInitialValues((prev) => {
       return { ...prev, [name]: value }
     })
-    if (name === "searchQuery") {
-      getAllFinancelist();
+    if (name === "sub_category_name") {
+      setSubCategoryName(value);
+    }
+    if (name === 'category') {
+      setcatagory(value);
     }
   }
+  useEffect(() => {
+    if (catagory) {
+      fetchSubcatagoryList();
+    }
 
+  }, [catagory])
+  const fetchSubcatagoryList = () => {
+    console.log(catagory)
+    getListSubcategories(catagory).then((res) => {
+      if (res?.message?.code === 200) {
+        setSubcatagory(res?.data);
+      }
+    })
+  }
   return (
     <ContentWrapper headerName="Finance">
       <div className="attendanceFilterDiv">
@@ -137,6 +156,47 @@ export const Finance = () => {
             setDatePopup(true);
           }}
         />
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel size="small" id="verificationStatus">
+            Select Catagory Type
+          </InputLabel>
+          <Select
+            size="small"
+            name="category"
+            labelId="category"
+            id="category"
+            value={catagory}
+            onChange={handleChange}
+            label="Catagoty Type"
+          >
+            <MenuItem size="small" value={"MONEY-IN"}>
+              MONEY-IN
+            </MenuItem>
+            <MenuItem size="small" value={"MONEY-OUT"}>
+              MONEY-OUT
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel size="small" id="verificationStatus">
+            Select Sub Catagory Name
+          </InputLabel>
+          <Select
+            size="small"
+            name="sub_category_name"
+            labelId="sub_category_name"
+            id="sub_category_name"
+            value={subcategoryName}
+            onChange={handleChange}
+            label="SubCatagoty Name"
+          >
+            {subCatagory?.map((item) => (
+              <MenuItem size="small" value={item._id}>
+                {item.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <div className="card">
           <Button onClick={getAllSearchFinancelist}>SUBMIT</Button>
           <Button onClick={onclickCancel}>CANCEL</Button>
