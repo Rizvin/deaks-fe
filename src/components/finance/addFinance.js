@@ -35,7 +35,7 @@ export const AddFinance = ({ setModalOpen }) => {
                 "sub_category_name": sub_category_name,
                 "category": catagory,
                 "amount": amount,
-                "description": remarks,
+                "remarks": remarks,
                 "subCategory": sub_category_name,
                 "transactionDate": transactionDate
             }
@@ -95,13 +95,13 @@ export const AddFinance = ({ setModalOpen }) => {
                             Select Catagory Type
                         </InputLabel>
                         <Select
-                            size="small"
                             name="category"
                             labelId="category"
                             id="category"
                             value={formik.values.category}
                             onChange={handleChange}
                             label="Catagoty Type"
+                            InputProps={{ sx: { height: 55 } }}
                         >
                             <MenuItem size="small" value={"MONEY-IN"}>
                                 MONEY-IN
@@ -119,7 +119,7 @@ export const AddFinance = ({ setModalOpen }) => {
                             Select Sub Catagory Name
                         </InputLabel>
                         <Select
-                            size="small"
+                            InputProps={{ sx: { height: 55 } }}
                             name="sub_category_name"
                             labelId="sub_category_name"
                             id="sub_category_name"

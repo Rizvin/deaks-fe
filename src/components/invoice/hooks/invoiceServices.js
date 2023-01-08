@@ -19,3 +19,12 @@ export const patchInvoice = async (params) => {
     const data = await axios.patch(`/invoice/update`, params);
     return data.data;
 }
+//create pdf
+export const createPdf = async (invoiceId) => {
+    const data = await axios.get(`/invoice/createPDF/${invoiceId}`);
+    return data.data;
+}
+export const sendInvoice = async (invoiceId) => {
+    const data = await axios.get(`/invoice/send/${invoiceId}`);
+    return data.data;
+}

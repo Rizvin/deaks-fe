@@ -1,14 +1,12 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import { ContentWrapper } from "../shared/components/ContentWrapper"
+import Backdrops from "../shared/components/Backdrops";
 import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel, TextField } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { invoiceHeading } from "./utils"
 import { usePagination } from "../shared/hooks/usePagination";
-import { UseInvoiceName, UseInvoiceList } from "./hooks/invoiceServices";
-import DoneIcon from '@mui/icons-material/Done';
-import CloseIcon from '@mui/icons-material/Close';
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { UseInvoiceName, UseInvoiceList, createPdf, sendInvoice } from "./hooks/invoiceServices";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import moment from "moment";
@@ -19,6 +17,8 @@ import { NotificationManager } from "react-notifications";
 import { getHotels } from "../shared/services/hotelServices";
 import { getOutlets } from "../shared/services/outletServices";
 import { useNavigate } from "react-router-dom";
+import DownloadingIcon from '@mui/icons-material/Downloading';
+import SendIcon from '@mui/icons-material/Send';
 export const Invoice = () => {
     const navigate = useNavigate();
     const [totalCount, setTotalCount] = useState('');
@@ -27,6 +27,7 @@ export const Invoice = () => {
     const [outlets, setOutlets] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState("");
     const [datePopup, setDatePopup] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [initialValues, setInitialValues] = useState({
         "startDate": "2022-11-04T18:30:00.000+00:00",
         "endDate": new Date(),
@@ -329,10 +330,10 @@ export const Invoice = () => {
                                 {item.amount}
                             </TableCell>
                             <TableCell align="left">
-                                {item.invoiceDate === null ? '00-00-0000' : item.invoiceDate}
+                                {item.invoiceDate === null ? '00-00-0000' : moment(item.invoiceDate).format('DD-MM-YYYY')}
                             </TableCell>
                             <TableCell align="left">
-                                {item.receivedDate === null ? '00-00-0000' : item.receivedDate}
+                                {item.receivedDate === null ? '00-00-0000' : moment(item.receivedDate).format('DD-MM-YYYY')}
                             </TableCell>
                             <TableCell align="left">
                                 {item.status}
@@ -348,12 +349,48 @@ export const Invoice = () => {
                                     >
                                         <ModeEditOutlineOutlined size="small" />
                                     </StyledIconButton>
+                                    <StyledIconButton
+                                        size="small"
+                                        aria-label="download attendance"
+                                        onClick={() => {
+                                            setLoading(!loading)
+                                            const name = item.attendanceName;
+                                            createPdf(item._id).then((response) => {
+                                                //console.log(item.attendanceName,"yjybjyh")
+                                                // const url = window.URL.createObjectURL(new Blob([response]));
+                                                const link = document.createElement('a');
+                                                link.href = "https://dev-deaks-be-8h2av.ondigitalocean.app/api/invoice/download";
+                                                link.setAttribute('download', name);
+                                                document.body.appendChild(link);
+                                                link.click();
+                                                // link.parentNode.removeChild(link);
+                                                setLoading(false)
+                                            })
+
+                                        }}
+                                    >
+                                        <DownloadingIcon size="small" />
+                                    </StyledIconButton>
+                                    <StyledIconButton
+                                        size="small"
+                                        aria-label="send attendance"
+                                        onClick={() => {
+                                            setLoading(!loading)
+                                            sendInvoice(item._id).then((res) => {
+                                                setLoading(false)
+                                            })
+
+                                        }}
+                                    >
+                                        <SendIcon size="small" />
+                                    </StyledIconButton>
                                 </Stack>
                             </TableCell>
                         </StyledTableRow>
                     );
                 })}
             </DeaksTable>
+            <Backdrops open={loading} />
             {Paginations}
         </ContentWrapper>
     )

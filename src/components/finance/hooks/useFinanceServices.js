@@ -15,3 +15,13 @@ export const getListSubcategories = async (catagory) => {
   const data = await axios.get(`/finance/listSubcategories/${catagory}`);
   return data.data;
 }
+export const UseDelete = async (id) => {
+  const data = await axios.patch(`/finance/delete/${id}`);
+  return data.data;
+}
+
+//create csv
+export const createcsv = async (body) => {
+  const data = await axios.post(`/finance/csv`, body);
+  return data.data;
+}

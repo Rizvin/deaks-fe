@@ -59,7 +59,7 @@ export const CatagoryModal = ({ setModalOpen }) => {
                             Select Catagory Type
                         </InputLabel>
                         <Select
-                            size="small"
+                            InputProps={{ sx: { height: 55 } }}
                             name="category"
                             labelId="category"
                             id="category"

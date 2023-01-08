@@ -15,7 +15,7 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
-import { UsePendingFinancelist } from "./hooks/usePendingFinanceServices";
+import { UseApprove, UseDelete, UsePendingFinancelist } from "./hooks/usePendingFinanceServices";
 import { CloseOutlined, DoneOutlineOutlined } from "@mui/icons-material";
 export const PendingFinance = () => {
   const navigate = useNavigate();
@@ -38,7 +38,6 @@ export const PendingFinance = () => {
       "skip": Paginations.props.page * Paginations.props.rowsPerPage,
     }
     UsePendingFinancelist(param).then((res) => {
-      console.log(res.data);
       if (res?.data) {
         setPendingFinanceData(res?.data);
         setTotalCount(totalCount)
@@ -46,11 +45,30 @@ export const PendingFinance = () => {
     });
   }
 
-
+  const onClickApprove = (finance_id, superAdmin) => {
+    const data = {
+      "superAdmin": superAdmin,
+      "isApproved": true,
+      "finance_id": finance_id
+    }
+    UseApprove(data).then((res) => {
+      if (res?.message?.code === 200) {
+        NotificationManager.success("Approved Successfully");
+      } else {
+        NotificationManager.error("Approved Failed");
+      }
+    })
+  }
   const deleteFinance = (id) => {
-    //deleteAttendanceItem(id).then((res) => {
-    getAllPendingFinancelist()
-    //  })
+    UseDelete(id).then((res) => {
+      if (res?.message?.code === 200) {
+        NotificationManager.success("Deleted Successfully");
+        getAllPendingFinancelist()
+      } else {
+        NotificationManager.error("Deleted Failed");
+      }
+
+    })
 
   }
 
@@ -78,7 +96,7 @@ export const PendingFinance = () => {
                   {item.remarks}
                 </TableCell>
                 <TableCell align="left">
-                  {item.transactionDate}
+                  {moment(item.transactionDate).format('DD-MM-YYYY')}
                 </TableCell>
 
                 <TableCell align="left">
@@ -101,7 +119,7 @@ export const PendingFinance = () => {
                   </StyledIconButton> : <StyledIconButton
                     size="small"
                     aria-label="approve by devjith"
-                  // onClick={() => { amending(item._id) }}
+                    onClick={() => { onClickApprove(item._id, "DEV") }}
                   >
                     <CloseOutlined size="small" />
                   </StyledIconButton>}
@@ -115,7 +133,7 @@ export const PendingFinance = () => {
                   </StyledIconButton> : <StyledIconButton
                     size="small"
                     aria-label="aprove by ashik"
-                  // onClick={() => { aproving(item._id) }}
+                    onClick={() => { onClickApprove(item._id, "ASHIK") }}
                   >
                     <CloseOutlined size="small" />
                   </StyledIconButton>}
