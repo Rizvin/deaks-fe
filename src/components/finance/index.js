@@ -31,8 +31,8 @@ export const Finance = () => {
   const [subCatagory, setSubcatagory] = useState([])
   const [loading, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
-    "startDate": "2022-11-04T18:30:00.000+00:00",
-    "endDate": "2023-01-06T18:30:00.000+00:00",
+    "startDate": "2022-10-04T18:30:00.000+00:00",
+    "endDate": new Date(),
     "searchQuery": "mon",
   })
   useEffect(() => {
@@ -94,13 +94,13 @@ export const Finance = () => {
   }
   const onclickCancel = () => {
     setInitialValues({
-      "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "startDate": "2022-10-04T18:30:00.000+00:00",
+      "endDate": new Date(),
       "searchQuery": "",
     })
     const params = {
-      "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "startDate": "2022-10-04T18:30:00.000+00:00",
+      "endDate": new Date(),
       "searchQuery": "",
       "pageNum": 1,
       "pageSize": Paginations.props.rowsPerPage,
@@ -260,7 +260,7 @@ export const Finance = () => {
                   {item.description}
                 </TableCell>
                 <TableCell align="left">
-                  {item.description}
+                  {item.amount}
                 </TableCell>
                 <TableCell align="left">
                   {item.remarks}
