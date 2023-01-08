@@ -341,13 +341,6 @@ export const Invoice = () => {
                                 <Stack direction="row" spacing={1}>
                                     <StyledIconButton
                                         size="small"
-                                        aria-label="delete Hotel"
-                                        onClick={() => { '' }}
-                                    >
-                                        <DeleteOutlinedIcon size="small" />
-                                    </StyledIconButton>
-                                    <StyledIconButton
-                                        size="small"
                                         aria-label="Edit User"
                                         onClick={() => {
                                             navigate(`/invoicedetails/${item._id}`)

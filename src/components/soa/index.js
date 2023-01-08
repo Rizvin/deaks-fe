@@ -83,11 +83,15 @@ export const SOA = () => {
                                 {item.invoiceUID}
                             </TableCell>
                             <TableCell align="left">
+                                {item.charges}
+                            </TableCell>
+                            <TableCell align="left">
                                 {item.creditedAmount}
                             </TableCell>
                             <TableCell align="left">
-                                {item.unsetteledBalance}
+                                {item.unsetteledBalance ?? 0}
                             </TableCell>
+
                         </StyledTableRow>)
                 }
                 )}

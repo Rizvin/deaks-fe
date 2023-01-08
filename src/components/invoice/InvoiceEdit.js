@@ -99,7 +99,7 @@ export const InvoiceEdit = () => {
         })
     }
     return (
-        <div>
+        <div className="formcontainer" >
             <form onSubmit={formik.handleSubmit}>
                 <Typography className="heading">Edit Invoice </Typography>
                 <div className="selfAttendanceFormWrapper">
@@ -142,7 +142,7 @@ export const InvoiceEdit = () => {
                         </InputLabel>
                         <Select
                             className="card"
-                            size="small"
+                            // size="small"
                             name="status"
                             value={initialValues.status}
                             labelId="status"
@@ -150,7 +150,7 @@ export const InvoiceEdit = () => {
                             onChange={handleChange}
                             label="Status"
                             InputLabelProps={{ required: true }}
-                            InputProps={{ sx: { height: 65 } }}
+                            InputProps={{ sx: { height: 55 } }}
                         >
                             <MenuItem size="small" value={"PENDING"}>
                                 PENDING
@@ -177,6 +177,7 @@ export const InvoiceEdit = () => {
                         InputProps={{ sx: { height: 55 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                     />
+                    <div></div>
                     {initialValues.status === 'RECEIVED BY THIRD PARTY' &&
                         <>
                             <FormControlLabel
@@ -190,16 +191,18 @@ export const InvoiceEdit = () => {
 
                         </>
                     }
-                    {initialPayment && initialValues.status === 'RECEIVED BY THIRD PARTY' && <><TextField
-                        id="initialDate"
-                        name="initialDate"
-                        type="date"
-                        onChange={handleChange}
-                        label="Initial payment Date"
-                        size="small"
-                        value={formik.values.initialDate}
-                        InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true, required: true }} /><TextField
+                    {initialPayment && initialValues.status === 'RECEIVED BY THIRD PARTY' && <>
+                        <TextField
+                            id="initialDate"
+                            name="initialDate"
+                            type="date"
+                            onChange={handleChange}
+                            label="Initial payment Date"
+                            size="small"
+                            value={formik.values.initialDate}
+                            InputProps={{ sx: { height: 55 } }}
+                            InputLabelProps={{ shrink: true, required: true }} />
+                        <TextField
                             id="initial_pay"
                             name="initial_pay"
                             type="number"
@@ -209,6 +212,7 @@ export const InvoiceEdit = () => {
                             value={formik.values.initialPay}
                             InputProps={{ sx: { height: 55 } }}
                             InputLabelProps={{ shrink: true, required: true }} /></>}
+
                     {initialValues.status === 'RECEIVED BY THIRD PARTY' &&
                         <>
                             <FormControlLabel
@@ -245,31 +249,33 @@ export const InvoiceEdit = () => {
                             InputLabelProps={{ shrink: true, required: true }} /></>}
 
                 </div>
-                <Button
-                    sx={{
-                        background: "#d21991",
-                        float: "right",
-                        width: "110px",
-                        height: "45px",
-                        marginLeft: "10px"
-                    }}
-                    variant="contained"
-                    onClick={() => { navigate(`/invoicelist`) }}
-                >
-                    Cancel
-                </Button>
-                <Button
-                    sx={{
-                        background: "#1976d2",
-                        float: "right",
-                        width: "110px",
-                        height: "45px",
-                    }}
-                    variant="contained"
-                    type="submit"
-                >
-                    Save
-                </Button>
+                <div className="buttonContainer">
+                    <Button
+                        sx={{
+                            background: "#d21991",
+                            float: "right",
+                            width: "110px",
+                            height: "45px",
+                            marginLeft: "10px"
+                        }}
+                        variant="contained"
+                        onClick={() => { navigate(`/invoicelist`) }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        sx={{
+                            background: "#1976d2",
+                            float: "right",
+                            width: "110px",
+                            height: "45px",
+                        }}
+                        variant="contained"
+                        type="submit"
+                    >
+                        Save
+                    </Button>
+                </div>
                 <Backdrops open={loading} />
             </form>
         </div>

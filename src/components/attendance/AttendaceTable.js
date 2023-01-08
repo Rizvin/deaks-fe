@@ -347,15 +347,16 @@ export const Attendance = () => {
                     >
                       <DeleteOutlinedIcon size="small" />
                     </StyledIconButton>
-                    <StyledIconButton
-                      size="small"
-                      aria-label="Edit User"
-                      onClick={() => {
-                        navigate(`/edit-attendance/${item._id}`)
-                      }}
-                    >
-                      <ModeEditOutlineOutlined size="small" />
-                    </StyledIconButton>
+                    {(item.status !== 'COMPLETED' || ((item.status === 'COMPLETED') && item.isApproved && item.isAmended)) &&
+                      <StyledIconButton
+                        size="small"
+                        aria-label="Edit User"
+                        onClick={() => {
+                          navigate(`/edit-attendance/${item._id}`)
+                        }}
+                      >
+                        <ModeEditOutlineOutlined size="small" />
+                      </StyledIconButton>}
                   </Stack>
                 </TableCell>
                 <TableCell align="left">
