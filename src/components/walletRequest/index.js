@@ -9,6 +9,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { UseWalletRequestlist, UseWalletRequestApprovel } from "./hooks/walletRequestService";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { NotificationManager } from "react-notifications";
+import { DoneAllOutlined } from "@mui/icons-material";
 export const WalletRequest = () => {
     const [totalCount, setTotalCount] = useState('');
     const [requestList, setRequestList] = useState();
@@ -43,7 +44,7 @@ export const WalletRequest = () => {
         })
     }
     return (
-        <ContentWrapper headerName="Wallet">
+        <ContentWrapper headerName="Wallet Requests">
             <DeaksTable headings={walletRequestHeading}>
                 {requestList?.map((item, index) => {
                     return (
@@ -66,7 +67,7 @@ export const WalletRequest = () => {
                                         }
                                     >
                                         {item.isApproved ? <CheckCircleIcon size="small" /> :
-                                            <CancelIcon size="small" />}
+                                            <DoneAllOutlined size="small" />}
                                     </StyledIconButton>
                                 </Stack>
                             </TableCell>
