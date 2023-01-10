@@ -207,7 +207,7 @@ export const Finance = () => {
         />
         <FormControl sx={{ minWidth: 180 }}>
           <InputLabel size="small" id="verificationStatus">
-            Select Catagory Type
+            Select Catagory
           </InputLabel>
           <Select
             size="small"
@@ -229,7 +229,7 @@ export const Finance = () => {
         {catagory &&
           <FormControl sx={{ minWidth: 180 }}>
             <InputLabel size="small" id="verificationStatus">
-              Select Sub Catagory Name
+              Select Sub Catagory
             </InputLabel>
             <Select
               size="small"
