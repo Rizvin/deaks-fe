@@ -3,7 +3,7 @@ import { ContentWrapper } from "../shared/components/ContentWrapper";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
 import { getHotels } from "../shared/services/hotelServices";
-import "./style/financeStyle.css";
+import "../attendance/style/attendenceStyle.css";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import { financeHeading } from "./utils";
 import Backdrops from "../shared/components/Backdrops";
@@ -293,9 +293,9 @@ export const Finance = () => {
         <div className="staffCount">Total  out :{"  " + totalOut}</div>
       </div>
       <div className="attendanceSearchDiv">
-        <Button onClick={() => setFinancePopup(true)}>Add Finance</Button>
-        <Button onClick={() => { setCatagoryPopup(true) }}>Add Catagory</Button>
-        <Button onClick={() => {
+        <Button className="addFinanceButton" onClick={() => setFinancePopup(true)} >Add Finance</Button>
+        <Button className="addCatagoryButton" onClick={() => { setCatagoryPopup(true) }}>Add Catagory</Button>
+        <Button className="addCsvButton" onClick={() => {
           setLoading(!loading)
           const name = "csv";
           const param = {
@@ -320,6 +320,7 @@ export const Finance = () => {
         }}>Export to CSV</Button>
         <TextField size="small"
           name="searchQuery"
+          placeholder="Search here..."
           onChange={handleChange}
           value={initialValues.searchQuery} />
       </div>

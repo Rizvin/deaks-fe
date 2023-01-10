@@ -311,7 +311,7 @@ export const Attendance = () => {
         />
       </DeaksModal>
       <div className="attendanceCountDiv">
-        <div className="attendanceCount">Total No.of Attendances :{"  " + totalCount}</div>
+        <div className="attendanceCount">Total Attendances :{"  " + totalCount}</div>
         <div className="staffCount">Total Staff Working : {" " + totalStaff}</div>
       </div>
       <div className="attendanceSearchDiv">
