@@ -105,9 +105,9 @@ font-size: 14px;
  }
  .attendanceSearchDiv .addFinanceButton{
   width: 20%;
-  background-color: #4e7014  !important;
+  background-color: #b7ab35  !important;
   text-align: center;
-  padding: 2px;
+  padding: 2px; 
   color: #fff;
  }
  .attendanceSearchDiv .addCatagoryButton{
@@ -119,7 +119,7 @@ font-size: 14px;
  }
  .attendanceSearchDiv .addCsvButton{
   width: 20%;
-  background-color: #b7ab35  !important;
+  background-color: #4e7014  !important;
   text-align: center;
   padding: 2px;
   color: #fff;

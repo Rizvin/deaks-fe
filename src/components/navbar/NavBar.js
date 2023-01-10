@@ -147,7 +147,7 @@ export default function NavBar() {
               </IconButton>
               <img style={{
                 borderRadius: "20px", Height: "80px",
-                width: "80px", marginRight: "10px"
+                width: "40px", marginRight: "10px"
               }} src={logo} alt="app logp" />
               <Typography variant="h6" noWrap component="div" style={{ flex: 1 }}>
                 Deaks
