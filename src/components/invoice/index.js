@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import DownloadingIcon from '@mui/icons-material/Downloading';
 import SendIcon from '@mui/icons-material/Send';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { DoneOutlineOutlined } from "@mui/icons-material";
+import DoneIcon from '@mui/icons-material/Done';
 export const Invoice = () => {
     const navigate = useNavigate();
     const [totalCount, setTotalCount] = useState('');
@@ -142,6 +142,7 @@ export const Invoice = () => {
         UseInvoiceList(param).then((res) => {
             if (res?.data?.invoice_list) {
                 setInvoiceList(res?.data?.invoice_list);
+                setTotalCount(res?.data?.total_records);
             }
         });
     }
@@ -170,6 +171,7 @@ export const Invoice = () => {
         UseInvoiceList(param).then((res) => {
             if (res?.data?.invoice_list) {
                 setInvoiceList(res?.data?.invoice_list);
+                setTotalCount(res.data?.total_records);
             }
         });
     }
@@ -192,6 +194,7 @@ export const Invoice = () => {
         UseInvoiceList(param).then((res) => {
             if (res?.data?.invoice_list) {
                 setInvoiceList(res?.data?.invoice_list);
+                setTotalCount(res?.data?.total_records);
             }
         });
     }
@@ -248,7 +251,6 @@ export const Invoice = () => {
                         Status
                     </InputLabel>
                     <Select
-                        className="card"
                         size="small"
                         name="status"
                         value={initialValues.status}
@@ -299,10 +301,11 @@ export const Invoice = () => {
                 </FormControl>
 
                 <div className="card">
-                    <Button onClick={getAllsearchInvoicelist}><DoneOutlineOutlined size="small" /></Button>
-          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
-                   
+                    <Button onClick={getAllsearchInvoicelist}><DoneIcon size="small" /></Button>
+                    <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
+
                 </div>
+
 
             </div>
             <DeaksModal

@@ -8,13 +8,17 @@ import { UseSOAlist, sendSOA, createPdf } from "./hooks/soaServices";
 import Backdrops from "../shared/components/Backdrops";
 import { Button, MenuItem, Select, TableCell, FormControl, InputLabel } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
+import SendIcon from '@mui/icons-material/Send';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { usePagination } from "../shared/hooks/usePagination";
 import { soaHeading } from "./utils";
 export const SOA = () => {
     const [hotelData, setHotelData] = useState([]);
     const [soaList, setSoaList] = useState([]);
     const [selectedHotel, setSelectedHotel] = useState("");
     const [loading, setLoading] = useState(false);
-
+    const [totalCount, setTotalCount] = useState("");
+    const Paginations = usePagination(totalCount);
     //Fetch all hotel details
     const queryParams = React.useMemo(() => {
         return {
@@ -47,6 +51,7 @@ export const SOA = () => {
             UseSOAlist(selectedHotel).then((res) => {
                 if (res?.data) {
                     setSoaList(res?.data);
+                    setTotalCount(res.data.length)
                 }
             })
         }
@@ -81,7 +86,7 @@ export const SOA = () => {
                                 setLoading(false)
                             })
 
-                        }}>MAIL</Button>
+                        }}><SendIcon /></Button>
                         <Button onClick={() => {
                             setLoading(!loading)
                             const name = 'SOA';
@@ -97,7 +102,7 @@ export const SOA = () => {
                                 setLoading(false)
                             })
 
-                        }}>DOWNLOAD</Button>
+                        }}><FileDownloadIcon /></Button>
                     </div>
                 }
             </div>
@@ -122,6 +127,7 @@ export const SOA = () => {
                 }
                 )}
             </DeaksTable>
+            {Paginations}
             <Backdrops open={loading} />
         </ContentWrapper>
     )

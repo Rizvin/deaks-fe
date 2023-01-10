@@ -19,7 +19,7 @@ import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-import { DoneOutlineOutlined } from "@mui/icons-material";
+import DoneIcon from '@mui/icons-material/Done';
 export const StaffAttendance = () => {
   const navigate = useNavigate();
   const [staffAttendance, setStaffAttendance] = useState([]);
@@ -293,9 +293,9 @@ export const StaffAttendance = () => {
           </Select>
         </FormControl>
         <div className="card">
-          <Button onClick={getAllsearchStaffAttendancelist}><DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={getAllsearchStaffAttendancelist}><DoneIcon size="medium" /></Button>
           <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
-         
+
         </div>
 
       </div>
@@ -313,19 +313,19 @@ export const StaffAttendance = () => {
           direction="horizontal"
         />
       </DeaksModal>
-      <div className="attendanceSearchDiv">
-        <TextField size="small"
-          name="searchQuery"
-          placeholder="Search here..."
-          onChange={handleChange}
-          value={initialValues.searchQuery} />
-      </div>
       <div className="attendanceCountDiv">
         <div className="attendanceCount">Total No.of Staff :{"  " + users}</div>
         <div className="staffCount">Total hour Working : {" " + hour}</div>
         <div className="attendanceCount">Total extra payment::{"  " + extraPay}</div>
         <div className="staffCount">Total deducted payment: : {" " + deduction}</div>
         <div className="attendanceCount">Total payment::{"  " + payment}</div>
+      </div>
+      <div className="attendanceSearchDiv">
+        <TextField size="small"
+          name="searchQuery"
+          placeholder="Search here..."
+          onChange={handleChange}
+          value={initialValues.searchQuery} />
       </div>
       <DeaksTable headings={staffAttendanceHeading}>
         {staffAttendance.map((item, index) => {

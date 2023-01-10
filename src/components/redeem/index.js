@@ -13,7 +13,7 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
-import { DoneOutlineOutlined } from "@mui/icons-material";
+import DoneIcon from '@mui/icons-material/Done';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 export const RedeemList = () => {
     const navigate = useNavigate();
@@ -116,9 +116,9 @@ export const RedeemList = () => {
                     }}
                 />
                 <div className="card">
-                    <Button onClick={getAllsearchWalletuserlist}><DoneOutlineOutlined size="small" /></Button>
-          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
-                   
+                    <Button onClick={getAllsearchWalletuserlist}><DoneIcon size="small" /></Button>
+                    <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
+
                 </div>
             </div>
             <DeaksModal

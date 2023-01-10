@@ -6,15 +6,11 @@ import "./style/financeStyle.css";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import { pendingFinanceHeading } from "./utils";
 import Backdrops from "../shared/components/Backdrops";
-import { Button, Stack, TableCell, TextField, Chip } from "@mui/material";
+import { Stack, TableCell } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { useNavigate } from "react-router-dom";
 import { NotificationManager } from "react-notifications";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import moment from "moment";
-import { addDays } from "date-fns";
-import { DeaksModal } from "../shared/components/DeaksModal";
-import { DateRangePicker } from "react-date-range";
 import { UseApprove, UseDelete, UsePendingFinancelist } from "./hooks/usePendingFinanceServices";
 import { CloseOutlined, DoneOutlineOutlined } from "@mui/icons-material";
 export const PendingFinance = () => {
@@ -40,7 +36,7 @@ export const PendingFinance = () => {
     UsePendingFinancelist(param).then((res) => {
       if (res?.data) {
         setPendingFinanceData(res?.data);
-        setTotalCount(totalCount)
+        setTotalCount(res?.data.length)
       }
     });
   }
@@ -71,8 +67,6 @@ export const PendingFinance = () => {
     })
 
   }
-
-
   return (
     <ContentWrapper headerName="Pending Finance">
       <DeaksTable headings={pendingFinanceHeading}>

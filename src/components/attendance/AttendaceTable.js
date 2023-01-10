@@ -10,6 +10,7 @@ import { Button, MenuItem, Select, Stack, TableCell, TextField, FormControl, Inp
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
 import { CloseOutlined, DoneOutlineOutlined } from "@mui/icons-material";
+import DoneIcon from '@mui/icons-material/Done';
 import { useNavigate } from "react-router-dom";
 import { createPdf, deleteAttendanceItem, sendAttendance, updateAmend, updateAprove, UseAttendencelist } from './hooks/useAttendence'
 import { getHotels } from "../shared/services/hotelServices";
@@ -293,7 +294,7 @@ export const Attendance = () => {
           </Select>
         </FormControl>
         <div className="card">
-          <Button onClick={getAllSearchAttendancelist}> <DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={getAllSearchAttendancelist}> <DoneIcon size="medium" /></Button>
           <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
         </div>
       </div>

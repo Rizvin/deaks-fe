@@ -6,4 +6,4 @@ body{background-image:linear-gradient(to right bottom, #f6f6ff, #f3f3ff, #f0f0ff
 .applicationWrapper .appMenuList ul{padding:0}
 .applicationWrapper .appMenuList ul a{display:flex;align-items:center;text-transform:capitalize;padding:2px 15px;list-style:none;margin:10px;color:rgb(2, 2, 2);font-size:12px;display:flex}
 .applicationWrapper .appMenuList ul a svg{margin-right:6px;font-size:20px}
-.applicationWrapper .appMenuList ul li .active{border-radius:20px;border:2px solid #c3af76;background:#c2bdbd}.iconLeftBar{font-size:18px}.addNewWrapper{display:flex;gap:10px;margin:17px 0}
+.applicationWrapper .appMenuList ul li .active{border-radius:20px;background:#bbb7ee}.iconLeftBar{font-size:18px}.addNewWrapper{display:flex;gap:10px;margin:17px 0}
