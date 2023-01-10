@@ -19,6 +19,8 @@ import { getOutlets } from "../shared/services/outletServices";
 import { useNavigate } from "react-router-dom";
 import DownloadingIcon from '@mui/icons-material/Downloading';
 import SendIcon from '@mui/icons-material/Send';
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import { DoneOutlineOutlined } from "@mui/icons-material";
 export const Invoice = () => {
     const navigate = useNavigate();
     const [totalCount, setTotalCount] = useState('');
@@ -297,8 +299,9 @@ export const Invoice = () => {
                 </FormControl>
 
                 <div className="card">
-                    <Button onClick={getAllsearchInvoicelist}>SUBMIT</Button>
-                    <Button onClick={onclickCancel}>CANCEL</Button>
+                    <Button onClick={getAllsearchInvoicelist}><DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
+                   
                 </div>
 
             </div>

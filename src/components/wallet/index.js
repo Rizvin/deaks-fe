@@ -17,6 +17,8 @@ import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
 import { SpecialPay } from "./specialPayModal";
+import { DoneOutlineOutlined } from "@mui/icons-material";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 export const Wallet = () => {
     const navigate = useNavigate();
     const [hotelData, setHotelData] = useState([]);
@@ -224,8 +226,8 @@ export const Wallet = () => {
                     </Select>
                 </FormControl>
                 <div className="card">
-                    <Button onClick={getAllsearchWalletuserlist}>SUBMIT</Button>
-                    <Button onClick={onclickCancel}>CANCEL</Button>
+                    <Button onClick={getAllsearchWalletuserlist}><DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
                 </div>
             </div>
             <DeaksModal

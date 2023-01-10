@@ -18,6 +18,8 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import { DoneOutlineOutlined } from "@mui/icons-material";
 export const StaffAttendance = () => {
   const navigate = useNavigate();
   const [staffAttendance, setStaffAttendance] = useState([]);
@@ -291,8 +293,9 @@ export const StaffAttendance = () => {
           </Select>
         </FormControl>
         <div className="card">
-          <Button onClick={getAllsearchStaffAttendancelist}>SUBMIT</Button>
-          <Button onClick={onclickCancel}>CANCEL</Button>
+          <Button onClick={getAllsearchStaffAttendancelist}><DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
+         
         </div>
 
       </div>
