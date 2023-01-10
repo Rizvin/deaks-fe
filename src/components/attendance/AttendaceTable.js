@@ -213,7 +213,7 @@ export const Attendance = () => {
   }
 
   return (
-    <ContentWrapper headerName="Attendance">
+    <ContentWrapper headerName="Attendance" className="attendenceContainer">
       <div className="attendanceFilterDiv">
         <Chip
           icon={<CalendarMonthIcon size="small" />}
