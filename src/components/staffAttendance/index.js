@@ -5,7 +5,7 @@ import { ContentWrapper } from "../shared/components/ContentWrapper";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
-import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel } from "@mui/material";
+import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel, TextField } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
 import "../attendance/style/attendenceStyle.css";
@@ -77,6 +77,7 @@ export const StaffAttendance = () => {
       "pageNum": 1,
       "pageSize": Paginations.props.rowsPerPage,
       "skip": Paginations.props.page * Paginations.props.rowsPerPage,
+      "searchQuery": initialValues.searchQuery,
     }
     UseStaffAttendencelist(param).then((res) => {
       if (res?.data?.staff_attendance_list) {
@@ -99,6 +100,7 @@ export const StaffAttendance = () => {
       "hotel": initialValues.hotel,
       "outlet": initialValues.outlet,
       "pageNum": 1,
+      "searchQuery": initialValues.searchQuery,
       "pageSize": Paginations.props.rowsPerPage,
       "skip": Paginations.props.page * Paginations.props.rowsPerPage,
     }
@@ -209,9 +211,7 @@ export const StaffAttendance = () => {
       } else {
         NotificationManager.error("Deletion Failed");
       }
-
     })
-
   }
   return (
     <ContentWrapper headerName="Staff Attendance">
@@ -313,6 +313,13 @@ export const StaffAttendance = () => {
           direction="horizontal"
         />
       </DeaksModal>
+      <div className="attendanceSearchDiv">
+        <TextField size="small"
+          name="searchQuery"
+          placeholder="Search here..."
+          onChange={handleChange}
+          value={initialValues.searchQuery} />
+      </div>
       <div className="attendanceCountDiv">
         <div className="attendanceCount">Total No.of Staff :{"  " + users}</div>
         <div className="staffCount">Total hour Working : {" " + hour}</div>

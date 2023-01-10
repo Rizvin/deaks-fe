@@ -40,14 +40,15 @@
   justify-content: center;
   margin-bottom: 1%;
 }
-.attendanceCount{
+.attendanceCountDiv .attendanceCount{
   width: 20%;
-  background-color: #005c68;
+   background-color: #005c68;
+  /* background-image: linear-gradient(#e187e8,#a09fcf); */
   text-align: center;
   padding: 1%;
   color: #fff;
 }
-.staffCount{
+.attendanceCountDiv .staffCount{
   width: 20%;
   background-color: #4c5008;
   text-align: center;
