@@ -30,7 +30,7 @@ const darkTheme = createTheme({
   palette: {
     // mode: 'dark',
     primary: {
-      main: '#2ae346',
+      main: '#80ff00',
     },
   },
 });
@@ -58,12 +58,14 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
+ 
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
+    
     marginLeft: `${drawerWidth}px`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
@@ -73,6 +75,16 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor:"#dbdae8",
+  width:"198px",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+const DrawerHeaderpart = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
@@ -194,7 +206,7 @@ export default function NavBar() {
 
         </Drawer>
         <Main open={open}>
-          <DrawerHeader />
+          <DrawerHeaderpart />
           <Outlet />
         </Main>
       </Box>
