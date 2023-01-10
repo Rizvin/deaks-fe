@@ -19,7 +19,8 @@ import { LeftMenuBar } from '../navigation/LeftMenuBar ';
 import ProtectedRoute from '../shared/components/ProtectedRoute';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Logout } from './UseNavBar';
-
+import { DeaksModal } from "../shared/components/DeaksModal";
+import { ChangePassword } from '../password/changePassword';
 const logo = require("../../assets/logo.jpg");
 
 
@@ -97,6 +98,7 @@ export default function NavBar() {
   const theme = useTheme();
   const navigation = useNavigate();
   const [open, setOpen] = React.useState(true);
+  const [popup, setpopup] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleDrawerOpen = () => {
@@ -175,9 +177,19 @@ export default function NavBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
+                <MenuItem onClick={() => { setpopup(true) }}>Change Password</MenuItem>
                 <MenuItem onClick={Onlogout}>Logout</MenuItem>
 
               </Menu>
+              <DeaksModal
+                modalOpen={popup}
+                setModalOpen={setpopup}
+                modalHeader="Select Date"
+              >
+                <ChangePassword
+                  setModalOpen={setpopup}
+                />
+              </DeaksModal>
             </Toolbar>
           </AppBar>
         </ThemeProvider>
