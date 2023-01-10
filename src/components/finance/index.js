@@ -19,6 +19,8 @@ import { DateRangePicker } from "react-date-range";
 import { createcsv, getListSubcategories, UseDelete, UseFinancelist } from "./hooks/useFinanceServices";
 import { AddFinance } from "./addFinance";
 import { CatagoryModal } from "../catagory";
+import { DoneOutlineOutlined } from "@mui/icons-material";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 export const Finance = () => {
   const navigate = useNavigate();
   const [totalCount, setTotalCount] = useState("");
@@ -268,8 +270,8 @@ export const Finance = () => {
           </FormControl>
         }
         <div className="card">
-          <Button onClick={getAllSearchFinancelist}>SUBMIT</Button>
-          <Button onClick={onclickCancel}>CANCEL</Button>
+          <Button onClick={getAllSearchFinancelist}><DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
         </div>
       </div>
       <DeaksModal

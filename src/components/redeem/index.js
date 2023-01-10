@@ -13,7 +13,8 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
-
+import { DoneOutlineOutlined } from "@mui/icons-material";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 export const RedeemList = () => {
     const navigate = useNavigate();
     const [totalAmount, setTotalAmount] = useState('');
@@ -115,8 +116,9 @@ export const RedeemList = () => {
                     }}
                 />
                 <div className="card">
-                    <Button onClick={getAllsearchWalletuserlist}>SUBMIT</Button>
-                    <Button onClick={onclickCancel}>CANCEL</Button>
+                    <Button onClick={getAllsearchWalletuserlist}><DoneOutlineOutlined size="small" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
+                   
                 </div>
             </div>
             <DeaksModal
