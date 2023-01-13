@@ -43,7 +43,7 @@ export const AttendanceEdit = () => {
     useEffect(() => {
         userList();
         getAttendanceDataBYId();
-         // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []);
     const userList = async () => {
         const list = await getUsersList();
@@ -103,7 +103,7 @@ export const AttendanceEdit = () => {
     })
 
     return (
-        <ContentWrapper ContentWrapper headerName="Edit Attendence">
+        <ContentWrapper ContentWrapper headerName="Edit Attendence" className="attendanceContainer">
             <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
                 <Typography className="heading">{formik.values.attendanceName}</Typography>
                 <div className="attendanceformWrapper">
@@ -166,9 +166,32 @@ export const AttendanceEdit = () => {
                 {data?.slots?.map((item, index) => {
                     return (
                         <div className="slotsection" key={index}>
-                            <Typography className="heading">{item.shiftName}</Typography>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography className="heading">{item.shiftName}</Typography>
+                                <Button
+                                    sx={{
+                                        marginTop: "20px",
+                                        background: "#8d2557",
+                                        float: "right",
+                                        width: "100px",
+                                        height: "35px",
+                                        marginBottom: '20px'
+                                    }}
+                                    variant="contained"
+                                    onClick={() => {
+                                        setModalOpen(true);
+                                        setSelectedSlot(item);
+                                        setslotUsers(getUser(item.users));
+                                        setmodalType(item.name)
+                                    }}
+                                >
+                                    Edit
+                                </Button>
+                            </div>
+
                             <Autocomplete
                                 multiple
+                                disabled
                                 id="tags-outlined-group"
                                 getOptionSelected={(option, value) =>
                                     option.label === value.label
@@ -219,6 +242,7 @@ export const AttendanceEdit = () => {
                                         Slot Status
                                     </InputLabel>
                                     <Select
+                                        disabled
                                         size="small"
                                         name="slotStatus"
                                         labelId="slotStatus"
@@ -235,26 +259,8 @@ export const AttendanceEdit = () => {
                                     </Select>
                                 </FormControl>
                             </div>
-                            <Button
-                                sx={{
-                                    marginTop: "20px",
-                                    background: "#8d2557",
-                                    float: "right",
-                                    width: "100px",
-                                    height: "35px",
-                                    marginBottom: '20px'
-                                }}
-                                variant="contained"
-                                onClick={() => {
-                                    setModalOpen(true);
-                                    setSelectedSlot(item);
-                                    setslotUsers(getUser(item.users));
-                                    setmodalType(item.name)
-                                }}
-                            >
-                                Edit
-                            </Button>
-                           
+
+
                         </div>
                     )
                 })}
@@ -266,7 +272,7 @@ export const AttendanceEdit = () => {
                         width: "110px",
                         height: "45px",
                         marginBottom: '20px',
-                        color:"#fff"
+                        color: "#fff"
                     }}
                     onClick={() => { setAddModalOpen(true) }}
                 >
@@ -288,19 +294,19 @@ export const AttendanceEdit = () => {
                     SAVE
                 </Button>
                 <Button
-          sx={{
-            marginTop: "20px",
-            background: "#d21991",
-            float: "right",
-            width: "110px",
-            height: "45px",
-            marginRight:"10px"
-          }}
-          variant="contained"
-          onClick={()=>{navigate("/attendance")}}
-        >
-          Cancel
-        </Button>
+                    sx={{
+                        marginTop: "20px",
+                        background: "#d21991",
+                        float: "right",
+                        width: "110px",
+                        height: "45px",
+                        marginRight: "10px"
+                    }}
+                    variant="contained"
+                    onClick={() => { navigate("/attendance") }}
+                >
+                    Cancel
+                </Button>
                 <DeaksModal
                     modalOpen={addModalOpen}
                     setModalOpen={setAddModalOpen}
@@ -316,23 +322,23 @@ export const AttendanceEdit = () => {
                     />
                 </DeaksModal>
                 <DeaksModal
-                                modalOpen={modalOpen}
-                                setModalOpen={setModalOpen}
-                                modalHeader={modalType}
-                                modalWidth={700}
-                            >
-                                <AttendanceModal
-                                    modalType={modalType}
-                                    setModalOpen={setModalOpen}
-                                    userData={userData}
-                                    selectedSlot={selectedSlot}
-                                    attendencedata={data}
-                                    setslotUsers={setslotUsers}
-                                    slotUsers={slotUsers}
-                                    getAttendanceDataBYId={getAttendanceDataBYId}
+                    modalOpen={modalOpen}
+                    setModalOpen={setModalOpen}
+                    modalHeader={modalType}
+                    modalWidth={700}
+                >
+                    <AttendanceModal
+                        modalType={modalType}
+                        setModalOpen={setModalOpen}
+                        userData={userData}
+                        selectedSlot={selectedSlot}
+                        attendencedata={data}
+                        setslotUsers={setslotUsers}
+                        slotUsers={slotUsers}
+                        getAttendanceDataBYId={getAttendanceDataBYId}
 
-                                />
-                            </DeaksModal>
+                    />
+                </DeaksModal>
             </form>
             <Backdrop
                 sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}

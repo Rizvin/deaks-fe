@@ -1,4 +1,4 @@
-import { Button, TextField, FormControl, MenuItem, Select, InputLabel,Typography } from "@mui/material";
+import { Button, TextField, FormControl, MenuItem, Select, InputLabel, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState, useEffect } from "react";
 import Backdrops from "../shared/components/Backdrops";
@@ -62,7 +62,7 @@ export const StaffAttendanceEdit = () => {
     });
     useEffect(() => {
         getAttendanceDataBYId();
-         // eslint-disable-next-line
+        // eslint-disable-next-line
     }, []);
     const getAttendanceDataBYId = () => {
         UseStaffAttendenceQuery(attendanceId).then((res) => {
@@ -125,9 +125,9 @@ export const StaffAttendanceEdit = () => {
         })
     }
     return (
-        <div>
+        <div className="formcontainer">
             <form onSubmit={formik.handleSubmit}>
-            <Typography className="heading">Edit Staff Attendance </Typography>
+                <Typography className="heading">Edit Staff Attendance </Typography>
                 <div className="selfAttendanceFormWrapper">
                     <TextField
                         id="attendanceNo"
@@ -136,7 +136,7 @@ export const StaffAttendanceEdit = () => {
                         label="Attendance No"
                         size="small"
                         value={formik.values.attendanceNo}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         disabled
                     />
@@ -147,7 +147,7 @@ export const StaffAttendanceEdit = () => {
                         label="Full Name"
                         size="small"
                         value={formik.values.fullName}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         disabled
                     />
@@ -158,7 +158,7 @@ export const StaffAttendanceEdit = () => {
                         label="Attendance Date"
                         size="small"
                         value={formik.values.date}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         disabled
                     />
@@ -169,7 +169,7 @@ export const StaffAttendanceEdit = () => {
                         label="Contact Details"
                         size="small"
                         value={formik.values.contactDetails}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         disabled
                     />
@@ -180,7 +180,7 @@ export const StaffAttendanceEdit = () => {
                         label="Hotel Name"
                         size="small"
                         value={formik.values.hotelName}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         disabled
                     />
@@ -191,7 +191,7 @@ export const StaffAttendanceEdit = () => {
                         label="Outlet Name"
                         size="small"
                         value={formik.values.outletName}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         disabled
                     />
@@ -208,8 +208,8 @@ export const StaffAttendanceEdit = () => {
                             id="status"
                             onChange={handleChange}
                             label="Attendance Status"
-                            InputLabelProps={{required: true }}
-                            InputProps={{ sx: { height: 55 } }}
+                            InputLabelProps={{ required: true }}
+                            InputProps={{ sx: { height: 40 } }}
                         >
                             <MenuItem size="small" value={"PENDING"}>
                                 PENDING
@@ -234,6 +234,7 @@ export const StaffAttendanceEdit = () => {
                         label="Start Time"
                         type="time"
                         onChange={handleChange}
+                        InputProps={{ sx: { height: 40 } }}
                         value={formik.values.startTime}
                         error={formik.touched.startTime && Boolean(formik.errors.startTime)}
                         helperText={formik.touched.startTime && formik.errors.startTime}
@@ -244,6 +245,7 @@ export const StaffAttendanceEdit = () => {
                         type="time"
                         label="End Time"
                         onChange={handleChange}
+                        InputProps={{ sx: { height: 40 } }}
                         value={formik.values.endTime}
                         error={formik.touched.endTime && Boolean(formik.errors.endTime)}
                         helperText={formik.touched.endTime && formik.errors.endTime}
@@ -256,8 +258,8 @@ export const StaffAttendanceEdit = () => {
                         size="small"
                         onChange={handleChange}
                         value={formik.values.breakTime}
-                        InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputProps={{ sx: { height: 40 } }}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <TextField
                         id="hourlyPay"
@@ -267,7 +269,7 @@ export const StaffAttendanceEdit = () => {
                         size="small"
                         onChange={handleChange}
                         value={formik.values.hourlyPay}
-                        InputProps={{ sx: { height: 55 } }}
+                        InputProps={{ sx: { height: 40 } }}
                         InputLabelProps={{ shrink: true, required: true }}
                         error={formik.touched.hourlyPay && Boolean(formik.errors.hourlyPay)}
                         helperText={formik.touched.hourlyPay && formik.errors.hourlyPay}
@@ -280,8 +282,8 @@ export const StaffAttendanceEdit = () => {
                         size="small"
                         onChange={handleChange}
                         value={formik.values.extraPay}
-                        InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputProps={{ sx: { height: 40 } }}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <TextField
                         id="deduction"
@@ -291,8 +293,8 @@ export const StaffAttendanceEdit = () => {
                         size="small"
                         onChange={handleChange}
                         value={formik.values.deduction}
-                        InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputProps={{ sx: { height: 40 } }}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <TextField
                         id="remarks"
@@ -302,19 +304,20 @@ export const StaffAttendanceEdit = () => {
                         size="small"
                         value={formik.values.remarks}
                         onChange={handleChange}
-                        InputProps={{ sx: { height: 55 } }}
-                        InputLabelProps={{ shrink: true}}
+                        InputProps={{ sx: { height: 40 } }}
+                        InputLabelProps={{ shrink: true }}
                     />
                     <div>
                     </div>
-                    </div>
+                </div>
+                <div className="buttonContainer">
                     <Button
                         sx={{
                             background: "#d21991",
                             float: "right",
                             width: "110px",
                             height: "45px",
-                            marginLeft: "10px"
+                            // marginLeft: "10px"
                         }}
                         variant="contained"
                         onClick={() => { navigate(`/staff-attendance`) }}
@@ -324,7 +327,7 @@ export const StaffAttendanceEdit = () => {
                     <Button
                         sx={{
                             background: "#1976d2",
-                             float: "right",
+                            float: "right",
                             width: "110px",
                             height: "45px",
                         }}
@@ -333,8 +336,8 @@ export const StaffAttendanceEdit = () => {
                     >
                         Save
                     </Button>
-                    
-               
+                </div>
+
                 <Backdrops open={loading} />
             </form>
         </div>

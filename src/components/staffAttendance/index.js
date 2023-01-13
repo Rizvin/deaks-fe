@@ -1,16 +1,16 @@
-import React, { useState, useCallback, useMemo,useEffect } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { NotificationManager } from "react-notifications";
 import { useNavigate } from "react-router-dom";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
-import { Button, MenuItem, Select, Stack, TableCell,  Chip, FormControl, InputLabel } from "@mui/material";
+import { Button, MenuItem, Select, Stack, TableCell, Chip, FormControl, InputLabel, TextField } from "@mui/material";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
 import "../attendance/style/attendenceStyle.css";
 import { staffAttendanceHeading } from "./utils";
-import { UseStaffAttendencelist,deleteAttendanceItem } from "./hooks/useSelfAttendance";
+import { UseStaffAttendencelist, deleteAttendanceItem } from "./hooks/useSelfAttendance";
 import { getHotels } from "../shared/services/hotelServices";
 import { getOutlets } from "../shared/services/outletServices";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -18,9 +18,12 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+import DoneIcon from '@mui/icons-material/Done';
 export const StaffAttendance = () => {
   const navigate = useNavigate();
   const [staffAttendance, setStaffAttendance] = useState([]);
+  const [totalCount, setTotalCount] = useState("");
   const [hotelData, setHotelData] = useState([]);
   const [outlets, setOutlets] = useState([]);
   const [selectedHotel, setSelectedHotel] = useState("");
@@ -32,13 +35,13 @@ export const StaffAttendance = () => {
   const [datePopup, setDatePopup] = useState(false);
   const [initialValues, setInitialValues] = useState({
     "startDate": "2022-11-04T18:30:00.000+00:00",
-    "endDate": "2022-11-20T18:30:00.000+00:00",
+    "endDate": new Date(),
     "status": "",
     "hotel": "",
     "outlet": "",
     "searchQuery": "",
   })
-  const Paginations = usePagination(20);
+  const Paginations = usePagination(totalCount);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -58,22 +61,23 @@ export const StaffAttendance = () => {
   ).format("MMM Do")}`;
   useEffect(() => {
     getAllStaffAttendancelist();
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [
     Paginations.props.rowsPerPage,
     Paginations.props.page,
   ])
-  
+
   const getAllStaffAttendancelist = () => {
     const param = {
-      "startDate":initialValues.startDate,
-      "endDate":initialValues.endDate,
+      "startDate": initialValues.startDate,
+      "endDate": initialValues.endDate,
       "status": initialValues.status,
       "hotel": initialValues.hotel,
       "outlet": initialValues.outlet,
       "pageNum": 1,
       "pageSize": Paginations.props.rowsPerPage,
       "skip": Paginations.props.page * Paginations.props.rowsPerPage,
+      "searchQuery": initialValues.searchQuery,
     }
     UseStaffAttendencelist(param).then((res) => {
       if (res?.data?.staff_attendance_list) {
@@ -83,18 +87,20 @@ export const StaffAttendance = () => {
         setTotalExtraPay(res?.data?.total_extra_payment);
         setTotalPayment(res?.data?.total_payment);
         setTotalWorkHour(res?.data?.total_working_hours);
+        setTotalCount(res?.data?.total_records)
 
       }
     });
   }
   const getAllsearchStaffAttendancelist = () => {
     const param = {
-      "startDate":date?.[0]?.startDate,
+      "startDate": date?.[0]?.startDate,
       "endDate": date?.[0]?.endDate,
       "status": initialValues.status,
       "hotel": initialValues.hotel,
       "outlet": initialValues.outlet,
       "pageNum": 1,
+      "searchQuery": initialValues.searchQuery,
       "pageSize": Paginations.props.rowsPerPage,
       "skip": Paginations.props.page * Paginations.props.rowsPerPage,
     }
@@ -162,7 +168,7 @@ export const StaffAttendance = () => {
   const onclickCancel = () => {
     setInitialValues({
       "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "endDate": new Date(),
       "status": "",
       "hotel": "",
       "outlet": "",
@@ -170,7 +176,7 @@ export const StaffAttendance = () => {
     })
     const param = {
       "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "endDate": new Date(),
       "status": "",
       "hotel": "",
       "outlet": "",
@@ -202,17 +208,15 @@ export const StaffAttendance = () => {
       if (res?.message?.code === 200) {
         NotificationManager.success("Deleted Successfully");
         getAllStaffAttendancelist()
-    } else {
+      } else {
         NotificationManager.error("Deletion Failed");
-    }
-     
+      }
     })
-
   }
   return (
     <ContentWrapper headerName="Staff Attendance">
-            <div className="attendanceFilterDiv">
-           <Chip
+      <div className="attendanceFilterDiv">
+        <Chip
           icon={<CalendarMonthIcon size="small" />}
           label={dateRangeText}
           onClick={() => {
@@ -289,8 +293,9 @@ export const StaffAttendance = () => {
           </Select>
         </FormControl>
         <div className="card">
-          <Button onClick={getAllsearchStaffAttendancelist}>SUBMIT</Button>
-          <Button onClick={onclickCancel}>CANCEL</Button>
+          <Button onClick={getAllsearchStaffAttendancelist}><DoneIcon size="medium" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
+
         </div>
 
       </div>
@@ -315,69 +320,76 @@ export const StaffAttendance = () => {
         <div className="staffCount">Total deducted payment: : {" " + deduction}</div>
         <div className="attendanceCount">Total payment::{"  " + payment}</div>
       </div>
+      <div className="attendanceSearchDiv">
+        <TextField size="small"
+          name="searchQuery"
+          placeholder="Search here..."
+          onChange={handleChange}
+          value={initialValues.searchQuery} />
+      </div>
       <DeaksTable headings={staffAttendanceHeading}>
         {staffAttendance.map((item, index) => {
           return (
             <StyledTableRow hover role="staffattendance" tabIndex={-1} key={index}>
-              <TableCell  align="left">
-                  {item.id}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.attendanceNo}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.fullName}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.contactDetails}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.hotelName}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.outletName}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.date}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.status}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.startTime}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.endTime}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.totalHours}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.hourlyPay}
-                </TableCell>
-                <TableCell  align="left">
-                  {item.totalPay}
-                </TableCell>
-                <TableCell key={`${item._id}`} align="left">
-                  <Stack direction="row" spacing={1}>
-                    <StyledIconButton
-                      size="small"
-                      aria-label="delete Hotel"
-                      onClick={()=>{deleteAttendance(item._id)}}
-                    >
-                      <DeleteOutlinedIcon size="small" />
-                    </StyledIconButton>
-                    <StyledIconButton
-                      size="small"
-                      aria-label="Edit User"
-                      onClick={() => {
-                        navigate(`/staff-attendance-edit/${item._id}`)
-                      }}
-                    >
-                      <ModeEditOutlineOutlined size="small" />
-                    </StyledIconButton>
-                  </Stack>
-                </TableCell>
+              <TableCell align="left">
+                {item.id}
+              </TableCell>
+              <TableCell align="left">
+                {item.attendanceNo}
+              </TableCell>
+              <TableCell align="left">
+                {item.fullName}
+              </TableCell>
+              <TableCell align="left">
+                {item.contactDetails}
+              </TableCell>
+              <TableCell align="left">
+                {item.hotelName}
+              </TableCell>
+              <TableCell align="left">
+                {item.outletName}
+              </TableCell>
+              <TableCell align="left">
+                {item.date}
+              </TableCell>
+              <TableCell align="left">
+                {item.status}
+              </TableCell>
+              <TableCell align="left">
+                {item.startTime}
+              </TableCell>
+              <TableCell align="left">
+                {item.endTime}
+              </TableCell>
+              <TableCell align="left">
+                {item.totalHours}
+              </TableCell>
+              <TableCell align="left">
+                {item.hourlyPay}
+              </TableCell>
+              <TableCell align="left">
+                {item.totalPay}
+              </TableCell>
+              <TableCell key={`${item._id}`} align="left">
+                <Stack direction="row" spacing={1}>
+                  <StyledIconButton
+                    size="small"
+                    aria-label="delete Hotel"
+                    onClick={() => { deleteAttendance(item._id) }}
+                  >
+                    <DeleteOutlinedIcon size="small" />
+                  </StyledIconButton>
+                  <StyledIconButton
+                    size="small"
+                    aria-label="Edit User"
+                    onClick={() => {
+                      navigate(`/staff-attendance-edit/${item._id}`)
+                    }}
+                  >
+                    <ModeEditOutlineOutlined size="small" />
+                  </StyledIconButton>
+                </Stack>
+              </TableCell>
             </StyledTableRow>
           );
         })}

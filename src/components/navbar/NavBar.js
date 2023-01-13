@@ -19,18 +19,19 @@ import { LeftMenuBar } from '../navigation/LeftMenuBar ';
 import ProtectedRoute from '../shared/components/ProtectedRoute';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Logout } from './UseNavBar';
-
+import { DeaksModal } from "../shared/components/DeaksModal";
+import { ChangePassword } from '../password/changePassword';
 const logo = require("../../assets/logo.jpg");
 
 
 
-const drawerWidth = 160;
+const drawerWidth = 200;
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
+    // mode: 'dark',
     primary: {
-      main: '#1e2022',
+      main: '#716aca',
     },
   },
 });
@@ -38,6 +39,7 @@ const darkTheme = createTheme({
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
+    backgroundColor: "white",
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -57,12 +59,14 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
+
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
+
     marginLeft: `${drawerWidth}px`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
@@ -72,6 +76,16 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  backgroundColor: "#dbdae8",
+  width: "198px",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+const DrawerHeaderpart = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
@@ -84,6 +98,7 @@ export default function NavBar() {
   const theme = useTheme();
   const navigation = useNavigate();
   const [open, setOpen] = React.useState(true);
+  const [popup, setpopup] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleDrawerOpen = () => {
@@ -103,39 +118,41 @@ export default function NavBar() {
 
   };
 
-  const Onlogout  = () => {
+  const Onlogout = () => {
     setAnchorEl(null);
 
-    Logout().then((response)=>{
- localStorage.setItem("Token","")
+    Logout().then((response) => {
+      localStorage.setItem("Token", "")
       console.log(response);
       navigation("/login");
     })
-    
+
   };
 
   return (
     <ProtectedRoute>
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <ThemeProvider theme={darkTheme}>
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <img style={{borderRadius:"20px",Height:"80px",
-          width:"80px",marginRight:"10px"}} src={logo} alt="app logp" />
-          <Typography variant="h6" noWrap component="div" style={{flex:1}}>
-            Deaks
-          </Typography>
-          <IconButton
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <ThemeProvider theme={darkTheme}>
+          <AppBar position="fixed" open={open}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: 'none' }) }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <img style={{
+                borderRadius: "20px", Height: "80px",
+                width: "40px", marginRight: "10px"
+              }} src={logo} alt="app logp" />
+              <Typography variant="h6" noWrap component="div" style={{ flex: 1 }}>
+                Deaks
+              </Typography>
+              <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -160,41 +177,52 @@ export default function NavBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
+                <MenuItem onClick={() => { setpopup(true) }}>Change Password</MenuItem>
                 <MenuItem onClick={Onlogout}>Logout</MenuItem>
 
               </Menu>
-        </Toolbar>
-      </AppBar>
-      </ThemeProvider>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+              <DeaksModal
+                modalOpen={popup}
+                setModalOpen={setpopup}
+                modalHeader="Change Password"
+                width={"50%"}
+              >
+                <ChangePassword
+                  setModalOpen={setpopup}
+                />
+              </DeaksModal>
+            </Toolbar>
+          </AppBar>
+        </ThemeProvider>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-           
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open} 
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        
-        <LeftMenuBar/>
-        
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-          <Outlet/>
-      </Main>
-    </Box>
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+
+          <LeftMenuBar />
+
+        </Drawer>
+        <Main open={open}>
+          <DrawerHeaderpart />
+          <Outlet />
+        </Main>
+      </Box>
     </ProtectedRoute>
   );
 }

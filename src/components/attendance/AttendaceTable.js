@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo,useEffect } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { ContentWrapper } from "../shared/components/ContentWrapper";
 import { DeaksTable } from "../shared/components/DeaksTable";
 import { usePagination } from "../shared/hooks/usePagination";
@@ -10,6 +10,7 @@ import { Button, MenuItem, Select, Stack, TableCell, TextField, FormControl, Inp
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import ModeEditOutlineOutlined from "@mui/icons-material/ModeEditOutlineOutlined";
 import { CloseOutlined, DoneOutlineOutlined } from "@mui/icons-material";
+import DoneIcon from '@mui/icons-material/Done';
 import { useNavigate } from "react-router-dom";
 import { createPdf, deleteAttendanceItem, sendAttendance, updateAmend, updateAprove, UseAttendencelist } from './hooks/useAttendence'
 import { getHotels } from "../shared/services/hotelServices";
@@ -22,6 +23,7 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 export const Attendance = () => {
   const navigate = useNavigate();
   const [totalCount, setTotalCount] = useState("");
@@ -35,7 +37,7 @@ export const Attendance = () => {
   const [loading, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
     "startDate": "2022-11-04T18:30:00.000+00:00",
-    "endDate": "2022-11-20T18:30:00.000+00:00",
+    "endDate": new Date(),
     "status": "",
     "hotel": "",
     "outlet": "",
@@ -44,8 +46,8 @@ export const Attendance = () => {
   // eslint-disable-next-line
   useEffect(() => {
     getAllAttendancelist();
-     // eslint-disable-next-line
-  }, [ Paginations.props.rowsPerPage, Paginations.props.page ])
+    // eslint-disable-next-line
+  }, [Paginations.props.rowsPerPage, Paginations.props.page])
   //Fetch all hotel details
   const queryParams = React.useMemo(() => {
     return {
@@ -156,7 +158,7 @@ export const Attendance = () => {
   const onclickCancel = () => {
     setInitialValues({
       "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "endDate": new Date(),
       "status": "",
       "hotel": "",
       "outlet": "",
@@ -164,7 +166,7 @@ export const Attendance = () => {
     })
     const params = {
       "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": "2022-11-20T18:30:00.000+00:00",
+      "endDate": new Date(),
       "status": "",
       "hotel": "",
       "outlet": "",
@@ -213,9 +215,9 @@ export const Attendance = () => {
   }
 
   return (
-    <ContentWrapper headerName="Attendance">
+    <ContentWrapper headerName="Attendance" className="attendenceContainer">
       <div className="attendanceFilterDiv">
-      <Chip
+        <Chip
           icon={<CalendarMonthIcon size="small" />}
           label={dateRangeText}
           onClick={() => {
@@ -292,8 +294,8 @@ export const Attendance = () => {
           </Select>
         </FormControl>
         <div className="card">
-          <Button onClick={getAllSearchAttendancelist}>SUBMIT</Button>
-          <Button onClick={onclickCancel}>CANCEL</Button>
+          <Button onClick={getAllSearchAttendancelist}> <DoneIcon size="medium" /></Button>
+          <Button onClick={onclickCancel}><HighlightOffRoundedIcon size="medium" /></Button>
         </div>
       </div>
       <DeaksModal
@@ -311,12 +313,13 @@ export const Attendance = () => {
         />
       </DeaksModal>
       <div className="attendanceCountDiv">
-        <div className="attendanceCount">Total No.of Attendances :{"  " + totalCount}</div>
+        <div className="attendanceCount">Total Attendances :{"  " + totalCount}</div>
         <div className="staffCount">Total Staff Working : {" " + totalStaff}</div>
       </div>
       <div className="attendanceSearchDiv">
         <TextField size="small"
           name="searchQuery"
+          placeholder="Search here..."
           onChange={handleChange}
           value={initialValues.searchQuery} />
       </div>
@@ -342,19 +345,20 @@ export const Attendance = () => {
                     <StyledIconButton
                       size="small"
                       aria-label="delete Hotel"
-                      onClick={()=>{deleteAttendance(item._id)}}
+                      onClick={() => { deleteAttendance(item._id) }}
                     >
                       <DeleteOutlinedIcon size="small" />
                     </StyledIconButton>
-                    <StyledIconButton
-                      size="small"
-                      aria-label="Edit User"
-                      onClick={() => {
-                        navigate(`/edit-attendance/${item._id}`)
-                      }}
-                    >
-                      <ModeEditOutlineOutlined size="small" />
-                    </StyledIconButton>
+                    {(item.status !== 'COMPLETED' || ((item.status === 'COMPLETED') && item.isApproved && item.isAmended)) &&
+                      <StyledIconButton
+                        size="small"
+                        aria-label="Edit User"
+                        onClick={() => {
+                          navigate(`/edit-attendance/${item._id}`)
+                        }}
+                      >
+                        <ModeEditOutlineOutlined size="small" />
+                      </StyledIconButton>}
                   </Stack>
                 </TableCell>
                 <TableCell align="left">
@@ -362,21 +366,21 @@ export const Attendance = () => {
                     <StyledIconButton
                       size="small"
                       aria-label="download attendance"
-                      onClick={()=>{
-                      setLoading(!loading)
-                        const name = item.attendanceName;                     
+                      onClick={() => {
+                        setLoading(!loading)
+                        const name = item.attendanceName;
                         createPdf(item._id).then((response) => {
                           //console.log(item.attendanceName,"yjybjyh")
-                            // const url = window.URL.createObjectURL(new Blob([response]));
-                            const link = document.createElement('a');
-                            link.href = "https://dev-deaks-be-8h2av.ondigitalocean.app/api/attendance/download";
-                            link.setAttribute('download', name);
-                            document.body.appendChild(link);
-                            link.click();
-                            // link.parentNode.removeChild(link);
-                            setLoading(false)
-                       })
-                       
+                          // const url = window.URL.createObjectURL(new Blob([response]));
+                          const link = document.createElement('a');
+                          link.href = "https://dev-deaks-be-8h2av.ondigitalocean.app/api/attendance/download";
+                          link.setAttribute('download', name);
+                          document.body.appendChild(link);
+                          link.click();
+                          // link.parentNode.removeChild(link);
+                          setLoading(false)
+                        })
+
                       }}
                     >
                       <DownloadingIcon size="small" />
@@ -386,10 +390,10 @@ export const Attendance = () => {
                       aria-label="send attendance"
                       onClick={() => {
                         setLoading(!loading)
-                        sendAttendance(item._id).then((res)=>{
+                        sendAttendance(item._id).then((res) => {
                           setLoading(false)
                         })
-                        
+
 
                       }}
                     >

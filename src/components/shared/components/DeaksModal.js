@@ -11,7 +11,7 @@ export const DeaksModal = (props) => {
     left: "50%",
     overflowY: "scroll",
     transform: "translate(-50%, -50%)",
-    width: "80%",
+    width: props.width? props.width:"80%",
     height: "auto",
     bgcolor: "background.paper",
     border: "2px solid #000",
