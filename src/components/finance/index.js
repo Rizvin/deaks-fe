@@ -300,12 +300,19 @@ export const Finance = () => {
         <Button className="addCsvButton" onClick={() => {
           setLoading(!loading)
           const name = "csv";
+          console.log("tatat",initialValues?.searchQuery)
           const param = {
-            "subCategory": subcategoryName ?? '',
-            "client": selectedHotel ?? '',
+            // "subCategory": subcategoryName ?? '',
+            // "client": selectedHotel ?? '',
             "startDate": initialValues?.searchQuery ? "2022-10-04T18:30:00.000+00:00" : date?.[0]?.startDate,
             "endDate": date?.[0]?.endDate,
             "searchQuery": initialValues?.searchQuery ?? catagory,
+          }
+          if(selectedHotel){
+            param.client = selectedHotel;
+          }
+          if(subcategoryName){
+            param.subCategory = subcategoryName;
           }
           createcsv(param).then((response) => {
             //console.log(item.attendanceName,"yjybjyh")
