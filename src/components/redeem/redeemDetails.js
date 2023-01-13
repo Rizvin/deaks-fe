@@ -50,10 +50,10 @@ export const RedeemDetails = () => {
                                 {item.fullName}
                             </TableCell>
                             <TableCell >
-                                {item.amount}
+                            {item.walletBalance}
                             </TableCell>
                             <TableCell >
-                                {item.walletBalance}
+                                {item.amount}
                             </TableCell>
                             <TableCell >
                                 {moment(item.createdAt).format('DD-MM-YYYY')}

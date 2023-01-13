@@ -245,7 +245,7 @@ export const Wallet = () => {
                 />
             </DeaksModal>
             <div className="attendanceCountDiv">
-                <div className="specialpayButton" onClick={() => setOpen(true)}>Add Special Pay</div>
+                <Button className="specialpayButton" onClick={() => setOpen(true)}>Add Special Pay</Button>
             </div>
             <DeaksModal
                 modalOpen={open}

@@ -184,7 +184,8 @@ export default function NavBar() {
               <DeaksModal
                 modalOpen={popup}
                 setModalOpen={setpopup}
-                modalHeader="Select Date"
+                modalHeader="Change Password"
+                width={"50%"}
               >
                 <ChangePassword
                   setModalOpen={setpopup}

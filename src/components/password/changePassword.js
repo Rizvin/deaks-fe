@@ -58,7 +58,7 @@ export const ChangePassword = ({ setModalOpen }) => {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-                <div className="hotelsFormWrapper">
+                <div className="newFormWrapper">
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="newPassword">Password</InputLabel>
                         <OutlinedInput

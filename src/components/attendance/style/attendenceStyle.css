@@ -1,3 +1,9 @@
+.newFormWrapper{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+  margin-top:30px
+}
 .hotelsFormWrapper{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -57,11 +63,11 @@
   color: #fff;
 }
 .attendanceCountDiv .specialpayButton{ 
-  width: 20%;
-  background-color: #6d41a1;
+  width: 15%;
+  background-color: #6d41a1 !important;
   text-align: center;
   /* height: 35px; */
-  padding: 3px;
+  padding: 4px;
   color: #fff;
 }
 .attendanceformWrapper{
