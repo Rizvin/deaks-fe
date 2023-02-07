@@ -15,6 +15,7 @@ import {
   getGroupById,
 } from "../shared/services/groupServices";
 import { useHotelFilter } from "../shared/hooks/useHotelFilter";
+import { useOutletFilter } from "../shared/hooks/useOutletFilter";
 import { StyledIconButton, StyledTableRow } from "../users/utils/userUtils";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
@@ -30,11 +31,13 @@ export const Groups = () => {
   const [groups, setGroups] = useState([]);
   const [updateInfo, setUpdateInfo] = useState({});
   const { HotelSelectList, selectedHotel } = useHotelFilter();
+  const { outletSelectList, selectedOutlet } = useOutletFilter(selectedHotel);
   const Paginations = usePagination(20);
   const query = useMemo(() => {
     return {
       groupTitle: searchKeyword,
       hotel: selectedHotel,
+      outlet: selectedOutlet,
       sortBy: "",
       orderBy: "",
       limit: Paginations.props.rowsPerPage,
@@ -43,6 +46,7 @@ export const Groups = () => {
   }, [
     searchKeyword,
     selectedHotel,
+    selectedOutlet,
     Paginations.props.rowsPerPage,
     Paginations.props.page,
   ]);
@@ -79,6 +83,7 @@ export const Groups = () => {
       <FilterSection>
         {SearchInput}
         {HotelSelectList}
+        {outletSelectList}
       </FilterSection>
       <DeaksTable headings={headings}>
         {groups.map((item, index) => {
@@ -145,7 +150,7 @@ export const Groups = () => {
         updateInfo={updateInfo}
         setUpdateInfo={setUpdateInfo}
         userGroups={userGroups}
-        confirmFunction={() => {}}
+        confirmFunction={() => { }}
       />
       <DeaksDialog
         heading="Warning"
