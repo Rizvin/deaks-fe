@@ -40,6 +40,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route index path={"/"} element={<Navigate replace to="/login" />} />
+        <Route path={"/privacyPolicy"} element={<PrivacyPolicy />} />
+        <Route path={"/termsConditions"} element={<TermsConditions />} /> 
         <Route path="/" element={<NavBar />}>
           <Route path={"/users"} element={<Users />} />
           {/* <Route path={"/attendance"} element={<Attendance/>}/> */}
@@ -53,9 +55,7 @@ function App() {
           <Route path={"/groups"} element={<Groups />} />
           <Route path={"/addNewSlots"} element={<AddNewSlots />} />
           <Route path={"/slot/details/:slotId"} element={<SlotDetails />} />
-          <Route path={"/daily"} element={<DailyAttendance />} />
-          <Route path={"/termsConditions"} element={<TermsConditions />} />
-          <Route path={"/privacyPolicy"} element={<PrivacyPolicy />} />
+          <Route path={"/daily"} element={<DailyAttendance />} />      
           <Route path={"/supportChannel"} element={<SupportChannel />} />
           <Route path={"/wallet"} element={<Wallet />} />
           <Route path={"/walletdetails/:id/:startDate/:endDate/:hotel/:outlet"} element={<WalletDetails />} />

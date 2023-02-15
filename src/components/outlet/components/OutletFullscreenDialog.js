@@ -16,7 +16,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
+  TextField, TextareaAutosize
 } from "@mui/material";
 import {
   fetchExtraColumns,
@@ -66,7 +66,7 @@ export default function OutletFullscreenDialog(props) {
     attendanceEmail: "",
     invoiceEmail: "",
     startingSerialNumber: "",
-    Abbreviation:""
+    Abbreviation: ""
   });
 
   React.useEffect(() => {
@@ -91,7 +91,7 @@ export default function OutletFullscreenDialog(props) {
         attendanceEmail: "",
         invoiceEmail: "",
         startingSerialNumber: "",
-        Abbreviation:""
+        Abbreviation: ""
       });
       setDialogType("add");
     }
@@ -398,21 +398,7 @@ export default function OutletFullscreenDialog(props) {
                           props.touched.payment && props.errors.payment
                         }
                       />
-                      <TextField
-                        id="jobRemarks"
-                        name="jobRemarks"
-                        label="Job Remarks"
-                        value={props?.values?.jobRemarks || ""}
-                        onChange={props.handleChange}
-                        size="small"
-                        error={
-                          props.touched.jobRemarks &&
-                          Boolean(props.errors.jobRemarks)
-                        }
-                        helperText={
-                          props.touched.jobRemarks && props.errors.jobRemarks
-                        }
-                      />
+
                       <TextField
                         id="youtubeLink"
                         name="youtubeLink"
@@ -456,6 +442,23 @@ export default function OutletFullscreenDialog(props) {
                         }
                         helperText={
                           props.touched.Abbreviation && props.errors.Abbreviation
+                        }
+                      />
+                      <TextareaAutosize
+                        id="jobRemarks"
+                        name="jobRemarks"
+                        label="Job Remarks"
+                        placeholder="Job Remarks"
+                        minRows={2}
+                        value={props?.values?.jobRemarks || ""}
+                        onChange={props.handleChange}
+                        style={{ width: 200 }}
+                        error={
+                          props.touched.jobRemarks &&
+                          Boolean(props.errors.jobRemarks)
+                        }
+                        helperText={
+                          props.touched.jobRemarks && props.errors.jobRemarks
                         }
                       />
                     </div>

@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 
 export const usePagination = (count) => {
   const [pagination, setPagination] = useState({
-    limit: 10,
+    limit: 100,
     skip: 0,
   });
   const { limit, skip } = pagination;
