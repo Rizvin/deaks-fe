@@ -31,7 +31,7 @@ const darkTheme = createTheme({
   palette: {
     // mode: 'dark',
     primary: {
-      main: '#716aca',
+      main: '#fbd126',
     },
   },
 });
@@ -78,7 +78,7 @@ const AppBar = styled(MuiAppBar, {
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  backgroundColor: "#dbdae8",
+  backgroundColor: "#0c3547",
   width: "198px",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
@@ -209,7 +209,7 @@ export default function NavBar() {
           open={open}
         >
           <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton onClick={handleDrawerClose} style={{color:"white"}}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </DrawerHeader>

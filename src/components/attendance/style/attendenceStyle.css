@@ -48,7 +48,7 @@
 }
 .attendanceCountDiv .attendanceCount{
   width: 20%;
-   background-color: #1d96c3;
+   background-color: #45677e;
   /* background-image: linear-gradient(#e187e8,#a09fcf); */
   text-align: center;
   padding: 1%;
@@ -56,7 +56,7 @@
 }
 .attendanceCountDiv .staffCount{
   width: 20%;
-  background-color: #5240bd;
+  background-color: #7ab0e8;
   text-align: center;
   /* height: 35px; */
   padding: 1%;
@@ -111,21 +111,21 @@ font-size: 14px;
  }
  .attendanceSearchDiv .addFinanceButton{
   width: 20%;
-  background-color: #b7ab35  !important;
+  background-color: #0c3547  !important;
   text-align: center;
   padding: 2px; 
   color: #fff;
  }
  .attendanceSearchDiv .addCatagoryButton{
   width: 20%;
-  background-color: #b37e37  !important;
+  background-color: #0c3547  !important;
   text-align: center;
   padding: 2px;
   color: #fff;
  }
  .attendanceSearchDiv .addCsvButton{
   width: 20%;
-  background-color: #4e7014  !important;
+  background-color: #71d021  !important;
   text-align: center;
   padding: 2px;
   color: #fff;
