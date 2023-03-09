@@ -59,14 +59,14 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
-
+ 
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
-
+   
     marginLeft: `${drawerWidth}px`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
@@ -92,6 +92,10 @@ const DrawerHeaderpart = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
+}));
+ 
+const DrawerSidemenue = styled('Drawer')(({theme})=>({
+  backgroundColor:"#0c3547",
 }));
 
 export default function NavBar() {
@@ -194,7 +198,7 @@ export default function NavBar() {
             </Toolbar>
           </AppBar>
         </ThemeProvider>
-        <Drawer
+        <DrawerSidemenue
           sx={{
             width: drawerWidth,
             flexShrink: 0,
@@ -202,8 +206,10 @@ export default function NavBar() {
               width: drawerWidth,
               boxSizing: 'border-box',
 
+
             },
           }}
+          
           variant="persistent"
           anchor="left"
           open={open}
@@ -217,7 +223,7 @@ export default function NavBar() {
 
           <LeftMenuBar />
 
-        </Drawer>
+        </DrawerSidemenue>
         <Main open={open}>
           <DrawerHeaderpart />
           <Outlet />
