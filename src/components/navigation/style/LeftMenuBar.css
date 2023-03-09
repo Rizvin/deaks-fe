@@ -1,7 +1,7 @@
 body{background-image:linear-gradient(to right bottom, #f6f6ff, #f3f3ff, #f0f0ff, #ecedff, #e9eaff);background-repeat:no-repeat;height:100%}
-.applicationWrapper{display:grid;grid-template-columns:1fr 7fr; overflow-y:scroll;overflow-x: hidden;}
+.applicationWrapper{display:grid;grid-template-columns:1fr 7fr; overflow-y:hidden;overflow-x: hidden;}
 .applicationWrapper .appLogo{border-radius:20px;margin:27px auto;height:80px;width:80px;display:flex;border:2px solid #c3af76}
-.applicationWrapper .menubarParent .menubarWrapper{background-color:#0c3547;height:100vh;width:200px;overflow-y: scroll;overflow-x: hidden;}
+.applicationWrapper .menubarParent .menubarWrapper{background-color:#0c3547;height:200vh;width:200px;overflow-y: hidden;overflow-x: hidden;}
 .applicationWrapper .appMenuList{margin-top:0px}
 .applicationWrapper .appMenuList ul{padding:0}
 .applicationWrapper .appMenuList ul a{display:flex;align-items:center;text-transform:capitalize;padding:2px 15px;list-style:none;margin:10px;color:rgb(255, 255, 255);font-size:12px;display:flex}
