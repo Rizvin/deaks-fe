@@ -30,6 +30,10 @@ export const Invoice = () => {
     const [selectedHotel, setSelectedHotel] = useState("");
     const [datePopup, setDatePopup] = useState(false);
     const [loading, setLoading] = useState(false);
+    const[totalPending,setTotalPending] = useState("");
+    const[totalSubmitted,setTotalSubmitted] = useState("");
+    const[totalRecieved,setTotalRecieved] = useState("");
+    
     const [initialValues, setInitialValues] = useState({
         "startDate": "2022-11-04T18:30:00.000+00:00",
         "endDate": new Date(),
@@ -195,6 +199,9 @@ export const Invoice = () => {
             if (res?.data?.invoice_list) {
                 setInvoiceList(res?.data?.invoice_list);
                 setTotalCount(res?.data?.total_records);
+                setTotalPending(res?.data?.total_pending);
+                setTotalSubmitted(res?.data?.total_submitted);
+                setTotalRecieved(res?.data?.total_received)
             }
         });
     }
@@ -308,6 +315,11 @@ export const Invoice = () => {
 
 
             </div>
+            <div className="attendanceCountDiv">
+        <div className="attendanceCount">Total Pending :{"  " + totalPending }</div>
+        <div className="staffCount">Total Submitted :{"  " + totalSubmitted }</div>
+        <div className="attendanceCount">Total Received :{"  " + totalRecieved}</div>
+      </div>
             <DeaksModal
                 modalOpen={datePopup}
                 setModalOpen={setDatePopup}
