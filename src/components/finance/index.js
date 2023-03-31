@@ -40,8 +40,8 @@ export const Finance = () => {
   const [loading, setLoading] = useState(false);
   const [hotelData, setHotelData] = useState([]);
   const [initialValues, setInitialValues] = useState({
-    "startDate": "2022-10-04T18:30:00.000+00:00",
-    "endDate": new Date(),
+    "startDate": new Date(),
+    "endDate": addDays(new Date(), 7),
     "searchQuery": null,
   })
   useEffect(() => {
@@ -106,16 +106,16 @@ export const Finance = () => {
   }
   const onclickCancel = () => {
     setInitialValues({
-      "startDate": "2022-10-04T18:30:00.000+00:00",
-      "endDate": new Date(),
+      "startDate": new Date(),
+    "endDate": addDays(new Date(), 7),
       "searchQuery": "",
     })
     setSubCategoryName(null);
     setcatagory(null);
     setSelectedHotel(null);
     const params = {
-      "startDate": "2022-10-04T18:30:00.000+00:00",
-      "endDate": new Date(),
+      "startDate": new Date(),
+    "endDate": addDays(new Date(), 7),
       "searchQuery": "",
       "pageNum": 1,
       "pageSize": Paginations.props.rowsPerPage,

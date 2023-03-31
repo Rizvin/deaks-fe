@@ -91,6 +91,7 @@ export const AttendanceEdit = () => {
         onSubmit: async (values) => {
             setLoading(true);
             patchAttendencestatus(attendanceId, values.status).then((res) => {
+                console.log("k",res)
                 setLoading(false);
                 if (res?.message?.code === 200) {
                     navigate("/attendance")
@@ -98,6 +99,10 @@ export const AttendanceEdit = () => {
                 } else {
                     NotificationManager.console.error("Update Failed");
                 }
+            }) .catch((err)=>{
+                console.log("k",err?.response?.data?.error)
+                setLoading(false);
+                NotificationManager.error(err?.response?.data?.error);
             })
         },
     })

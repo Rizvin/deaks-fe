@@ -26,8 +26,8 @@ export const Wallet = () => {
     const [totalAmount, setTotalAmount] = useState('');
     const [totalCount, setTotalCount] = useState('');
     const [initialValues, setInitialValues] = useState({
-        "startDate": "2022-11-04T18:30:00.000+00:00",
-        "endDate": new Date(),
+        "startDate": new Date(),
+        "endDate": addDays(new Date(), 7),
         "hotel": "",
         "outlet": "",
     });
@@ -136,15 +136,15 @@ export const Wallet = () => {
     }
     const onclickCancel = () => {
         setInitialValues({
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+            "endDate": addDays(new Date(), 7),
             "status": "",
             "hotel": "",
             "outlet": "",
         })
         const param = {
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+            "endDate": addDays(new Date(), 7),
             "status": "",
             "hotel": "",
             "outlet": "",
