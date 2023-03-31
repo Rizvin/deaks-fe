@@ -34,8 +34,8 @@ export const StaffAttendance = () => {
   const [hour, setTotalWorkHour] = useState("");
   const [datePopup, setDatePopup] = useState(false);
   const [initialValues, setInitialValues] = useState({
-    "startDate": "2022-11-04T18:30:00.000+00:00",
-    "endDate": new Date(),
+    "startDate": new Date(),
+    "endDate": addDays(new Date(), 7),
     "status": "",
     "hotel": "",
     "outlet": "",
@@ -167,16 +167,16 @@ export const StaffAttendance = () => {
 
   const onclickCancel = () => {
     setInitialValues({
-      "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": new Date(),
+      "startDate": new Date(),
+      "endDate": addDays(new Date(), 7),
       "status": "",
       "hotel": "",
       "outlet": "",
       "searchQuery": "",
     })
     const param = {
-      "startDate": "2022-11-04T18:30:00.000+00:00",
-      "endDate": new Date(),
+      "startDate": new Date(),
+      "endDate": addDays(new Date(), 7),
       "status": "",
       "hotel": "",
       "outlet": "",

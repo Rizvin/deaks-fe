@@ -177,6 +177,9 @@ export const Slots = () => {
                   {item.shiftName}
                 </TableCell>
                 <TableCell key={`${""}`} align="left">
+                  {item.date}
+                </TableCell>
+                <TableCell key={`${""}`} align="left">
                   <Chip
                     label={`${timeConv(item?.startTime)} - ${timeConv(
                       item?.endTime

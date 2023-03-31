@@ -21,9 +21,8 @@ export const RedeemList = () => {
     const [totalCount, setTotalCount] = useState('');
     const Paginations = usePagination(totalCount);
     const [initialValues, setInitialValues] = useState({
-        "startDate": "2022-11-04T18:30:00.000+00:00",
-        "endDate": new Date(),
-
+        "startDate": new Date(),
+        "endDate": addDays(new Date(), 7),
     });
     const [userList, setUserList] = useState([]);
     const [datePopup, setDatePopup] = useState(false);
@@ -71,14 +70,14 @@ export const RedeemList = () => {
 
     const onclickCancel = () => {
         setInitialValues({
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+    "endDate": addDays(new Date(), 7),
             "name": "",
 
         })
         const param = {
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+    "endDate": addDays(new Date(), 7),
             "name": "",
             "pageNum": 1,
             "pageSize": Paginations.props.rowsPerPage,

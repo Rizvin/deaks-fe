@@ -16,18 +16,19 @@ import moment from "moment";
 import { addDays } from "date-fns";
 import { DeaksModal } from "../shared/components/DeaksModal";
 import { DateRangePicker } from "react-date-range";
-import { SpecialPay } from "./specialPayModal";
+
 import DoneIcon from '@mui/icons-material/Done';
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
-export const Wallet = () => {
+import { DeaksReportTable } from "../shared/components/DeaksReportTable";
+export const Reports = () => {
     const navigate = useNavigate();
     const [hotelData, setHotelData] = useState([]);
     const [outlets, setOutlets] = useState([]);
     const [totalAmount, setTotalAmount] = useState('');
     const [totalCount, setTotalCount] = useState('');
     const [initialValues, setInitialValues] = useState({
-        "startDate": new Date(),
-        "endDate": addDays(new Date(), 7),
+        "startDate": "2022-11-04T18:30:00.000+00:00",
+        "endDate": new Date(),
         "hotel": "",
         "outlet": "",
     });
@@ -136,15 +137,15 @@ export const Wallet = () => {
     }
     const onclickCancel = () => {
         setInitialValues({
-            "startDate": new Date(),
-            "endDate": addDays(new Date(), 7),
+            "startDate": "2022-11-04T18:30:00.000+00:00",
+            "endDate": new Date(),
             "status": "",
             "hotel": "",
             "outlet": "",
         })
         const param = {
-            "startDate": new Date(),
-            "endDate": addDays(new Date(), 7),
+            "startDate": "2022-11-04T18:30:00.000+00:00",
+            "endDate": new Date(),
             "status": "",
             "hotel": "",
             "outlet": "",
@@ -244,10 +245,18 @@ export const Wallet = () => {
                     direction="horizontal"
                 />
             </DeaksModal>
+            
+           
             <div className="attendanceCountDiv">
-                <Button className="specialpayButton" onClick={() => setOpen(true)}>Add Special Pay</Button>
+                <div className="attendanceCount">Account Balance :{"  " + totalAmount}</div>
+                <div className="staffCount">Company Assets : {" " + totalCount}</div>
+                <div className="attendanceCount">Submitted Invoice :{"  " + totalAmount}</div>
+                <div className="staffCount">Pending Invoice : {" " + totalCount}</div>
             </div>
-            <DeaksModal
+            <div className="attendanceCountDiv">
+                <Button className="specialpayButton" onClick={() => setOpen(true)}>Export to csv</Button>
+            </div>
+            {/* <DeaksModal
                 modalOpen={open}
                 setModalOpen={setOpen}
                 modalHeader="Add Special Rate"
@@ -260,12 +269,8 @@ export const Wallet = () => {
                     outlets={outlets}
                     fetchOutlets={fetchOutlets} />
 
-            </DeaksModal>
-            <div className="attendanceCountDiv">
-                <div className="attendanceCount">Total Amount :{"  " + totalAmount}</div>
-                <div className="staffCount">Total Count : {" " + totalCount}</div>
-            </div>
-            <DeaksTable headings={walletHeading}>
+            </DeaksModal> */}
+            <DeaksReportTable headings={walletHeading}>
                 {userList?.map((item, index) => {
                     return (
                         <StyledTableRow hover role="wallet" tabIndex={-1} key={index}>
@@ -294,7 +299,7 @@ export const Wallet = () => {
                         </StyledTableRow>
                     )
                 })}
-            </DeaksTable>
+            </DeaksReportTable>
             {Paginations}
         </ContentWrapper>
     )

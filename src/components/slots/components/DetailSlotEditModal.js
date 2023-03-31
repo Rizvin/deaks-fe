@@ -447,7 +447,7 @@ export const DetailSlotEditModal = ({
               formEditMode ? editSlot() : saveSlotRow();
             }}
           >
-            {formEditMode ? "Edit Slot" : "Save Slot"}
+            {formEditMode ? "Update Slot" : "Save Slot"}
           </Button>
         </div>
       </div>

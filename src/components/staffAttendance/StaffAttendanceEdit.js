@@ -236,7 +236,7 @@ export const StaffAttendanceEdit = () => {
                         onChange={handleChange}
                         InputProps={{ sx: { height: 40 } }}
                         value={formik.values.startTime}
-                        error={formik.touched.startTime && Boolean(formik.errors.startTime)}
+                        // error={formik.touched.startTime && Boolean(formik.errors.startTime)}
                         helperText={formik.touched.startTime && formik.errors.startTime}
                     />
                     <TextField
@@ -247,7 +247,7 @@ export const StaffAttendanceEdit = () => {
                         onChange={handleChange}
                         InputProps={{ sx: { height: 40 } }}
                         value={formik.values.endTime}
-                        error={formik.touched.endTime && Boolean(formik.errors.endTime)}
+                        // error={formik.touched.endTime && Boolean(formik.errors.endTime)}
                         helperText={formik.touched.endTime && formik.errors.endTime}
                     />
                     <TextField

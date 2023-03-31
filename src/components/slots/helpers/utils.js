@@ -1,6 +1,7 @@
 export const headings = [
   { name: "Slot ID", width: 50 },
   { name: "Slot Name", width: 50 },
+  { name: "Date", width: 50 },
   { name: "Timing", width: 50 },
   { name: "status", width: 50 },
   { name: "Hotel", width: 50 },

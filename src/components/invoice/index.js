@@ -35,8 +35,8 @@ export const Invoice = () => {
     const[totalRecieved,setTotalRecieved] = useState("");
     
     const [initialValues, setInitialValues] = useState({
-        "startDate": "2022-11-04T18:30:00.000+00:00",
-        "endDate": new Date(),
+        "startDate": new Date(),
+        "endDate": addDays(new Date(), 7),
         "status": "",
         "hotel": "",
         "outlet": "",
@@ -152,8 +152,8 @@ export const Invoice = () => {
     }
     const onclickCancel = () => {
         setInitialValues({
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+            "endDate": addDays(new Date(), 7),
             "status": "",
             "hotel": "",
             "outlet": "",
@@ -161,8 +161,8 @@ export const Invoice = () => {
             "invoice_name": '',
         })
         const param = {
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+            "endDate": addDays(new Date(), 7),
             "status": "",
             "hotel": "",
             "outlet": "",
@@ -185,8 +185,8 @@ export const Invoice = () => {
     Paginations.props.page,])
     const fetchInvoicelist = () => {
         const param = {
-            "startDate": "2022-11-04T18:30:00.000+00:00",
-            "endDate": new Date(),
+            "startDate": new Date(),
+            "endDate": addDays(new Date(), 7),
             "status": "",
             "hotel": "",
             "outlet": "",
