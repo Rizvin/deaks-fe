@@ -106,6 +106,11 @@ export const LeftMenuBar = (props) => {
                   <PendingActionsIcon />Pending Finance
                 </NavLink>
               </li>
+              {/* <li>
+                <NavLink to="/reports" activeclassname="selected">
+                  <PendingActionsIcon />Reports
+                </NavLink>
+              </li> */}
             </ul>
           </div>
         </div>

@@ -33,6 +33,7 @@ import { InvoiceEdit } from "./components/invoice/InvoiceEdit";
 import { SOA } from "./components/soa";
 import { Finance } from "./components/finance";
 import { PendingFinance } from "./components/pendingFinance";
+import { Reports } from "./components/reports";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route path={"/soalist"} element={<SOA />} />
           <Route path={"/financetable"} element={<Finance />} />
           <Route path={"/pendingfinancetable"} element={<PendingFinance />} />
+          {/* <Route path={"/reports"} element={<Reports />} /> */}
           
         </Route>
       </Routes>
