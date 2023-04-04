@@ -24,8 +24,7 @@ export const DailyAttendance = () => {
   const [dailyInfo, setDailyInfo] = useState([]);
   const [selectedHotel, setSelectedHotel] = useState("")
   const [initialValues, setInitialValues] = useState({
-    "startDate": "2022-11-04T18:30:00.000+00:00",
-    "endDate": new Date(),
+    "date":"",
     "status": "",
     "hotel": "",
     "outlet": "",
@@ -38,7 +37,7 @@ export const DailyAttendance = () => {
 
   const getAllSearchdailyAttendancelist = () => {
     const fetchPayload = {
-      date: moment(),
+      date:  new Date(initialValues.date),
       page_num: 1,
       page_size: 5,
       search_query: "",
@@ -50,7 +49,7 @@ export const DailyAttendance = () => {
   }
   const onclickCancel = () => {
     const fetchPayload = {
-      date: moment(),
+      date: new Date(),
       page_num: 1,
       page_size: 5,
       search_query: "",
@@ -122,13 +121,17 @@ export const DailyAttendance = () => {
     <ContentWrapper headerName="Daily Attendance">
       <FilterSection>
         {SearchInput}
+        <FormControl sx={{ minWidth: 150 }} size="small">
         <TextField
           name="date"
           label="Select Date"
           size="small"
           InputLabelProps={{ shrink: true, required: true }}
           type="date"
+          value={initialValues.date}
+          onChange={handleChange}
         />
+        </FormControl>
         <FormControl sx={{ minWidth: 150 }} size="small">
           <InputLabel id="demo-simple-select-helper-label">
             Select Hotel
