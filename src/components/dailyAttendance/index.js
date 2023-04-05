@@ -44,8 +44,10 @@ export const DailyAttendance = () => {
       hotel_id: selectedHotel ?? '',
       outlet_id: initialValues.outlet,
     };
-    const { data } = fetchDaily(fetchPayload);
-    setDailyInfo(data);
+     fetchDaily(fetchPayload).then((res)=>{
+      setDailyInfo(res);
+     })
+    
   }
   const onclickCancel = () => {
     const fetchPayload = {
@@ -56,8 +58,9 @@ export const DailyAttendance = () => {
       hotel_id: '',
       outlet_id: "",
     };
-    const { data } = fetchDaily(fetchPayload);
-    setDailyInfo(data);
+    fetchDaily(fetchPayload).then((res)=>{
+      setDailyInfo(res);
+     })
   }
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -183,7 +186,7 @@ export const DailyAttendance = () => {
                 {item.name}
               </TableCell>
               <TableCell key={``} align="left">
-                <Chip label={`${item.startTime} - ${item.endTime}}`} />
+                <Chip label={`${item.startTime} - ${item.endTime}`} />
               </TableCell>
               <TableCell key={``} align="left">
                 <Chip label={item.status} />
