@@ -70,6 +70,13 @@
   padding: 4px;
   color: #fff;
 }
+.attendanceCountDiv  .addCsvButton{
+  width:15%;
+  background-color: #71d021  !important;
+  text-align: center;
+  padding: 4px;
+  color: #fff;
+ }
 .attendanceformWrapper{
   display:grid;
   grid-template-columns:1fr 1fr;

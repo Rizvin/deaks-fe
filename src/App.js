@@ -69,7 +69,7 @@ function App() {
           <Route path={"/soalist"} element={<SOA />} />
           <Route path={"/financetable"} element={<Finance />} />
           <Route path={"/pendingfinancetable"} element={<PendingFinance />} />
-          {/* <Route path={"/reports"} element={<Reports />} /> */}
+          <Route path={"/reports"} element={<Reports />} />
           
         </Route>
       </Routes>

@@ -35,17 +35,18 @@ export const DeaksReportTable = (props) => {
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }} variant="outlined">
-      <TableContainer sx={{ maxHeight: maxHeight }}>
-        <Table stickyHeader aria-label="sticky table" size="small">
+      <TableContainer style={{marginBottom:"2%"}}>
+        <Table stickyHeader aria-label="sticky table" >
           <TableHead sx={{ height: "50px" }}>
           <StyledTableRow>
-            <StyledTableCell></StyledTableCell>
-            <TableCell colSpan={5} style={{backgroundColor:"#D0CECE",textAlign:"center"}}>SALES REPORT</TableCell>
+            <StyledTableCell style={{width:"110px"}}></StyledTableCell>
+            <StyledTableCell colSpan={5} style={{backgroundColor:"#D0CECE",textAlign:"center"}}>SALES REPORT</StyledTableCell>
             <TableCell colSpan={2} style={{backgroundColor:"#DDEBF7",textAlign:"center"}}>WALLET</TableCell>
-            <TableCell colSpan={3} style={{backgroundColor:"#FFF2CC",textAlign:"center"}}>INVOICE</TableCell>
-            <TableCell colSpan={3} style={{backgroundColor:"#E2EFDA",textAlign:"center"}}>GST</TableCell>
+            <TableCell colSpan={2} style={{backgroundColor:"#FFF2CC",textAlign:"center"}}>INVOICE</TableCell>
+            <TableCell colSpan={2} style={{backgroundColor:"#E2EFDA",textAlign:"center"}}>GST</TableCell>
             <TableCell colSpan={2} style={{backgroundColor:"#FCE4D6",textAlign:"center"}}>OTHER EXPENSES</TableCell>
       </StyledTableRow>
+     
             <StyledTableRow>
             <StyledTableCell >Date to day</StyledTableCell>
             
@@ -61,8 +62,8 @@ export const DeaksReportTable = (props) => {
               ))}
           
             </StyledTableRow>
-           
-          </TableHead>
+            </TableHead>
+          
           <TableBody>{props.children}</TableBody>
         </Table>
       </TableContainer>
