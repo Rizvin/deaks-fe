@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-// import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import { RiHotelFill } from "react-icons/ri";
@@ -15,6 +15,8 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import MailIcon from '@mui/icons-material/Mail';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import "./style/LeftMenuBar.css";
 // const logo = require("../../assets/logo.jpg");
 
@@ -58,12 +60,12 @@ export const LeftMenuBar = (props) => {
               </li>
               <li>
                 <NavLink to="/attendance" activeclassname="selected">
-                  <PeopleAltIcon /> Attendance
+                  <PlaylistAddCheckIcon /> Attendance
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/staff-attendance" activeclassname="selected">
-                  <PeopleAltIcon /> Staff Attendance
+                  <AssignmentIndIcon /> Staff Attendance
                 </NavLink>
               </li>
               <li>
@@ -106,11 +108,11 @@ export const LeftMenuBar = (props) => {
                   <PendingActionsIcon />Pending Finance
                 </NavLink>
               </li>
-              {/* <li>
+              <li>
                 <NavLink to="/reports" activeclassname="selected">
-                  <PendingActionsIcon />Reports
+                  <AssessmentIcon />Reports
                 </NavLink>
-              </li> */}
+              </li>
             </ul>
           </div>
         </div>
